@@ -567,6 +567,13 @@ body {
 
 /* --- Tablets (768px - 991px) --- */
 @media (max-width: 991.98px) {
+    .navbar-collapse {
+        background-color: var(--brand-dark);
+        padding: 1rem;
+        margin-top: 1rem;
+        border-radius: 8px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+    }
     .carousel-item {
         height: 80vh;
         min-height: 600px;
@@ -760,6 +767,13 @@ body {
     .navbar .py-4 {
         padding-top: 0.8rem !important;
         padding-bottom: 0.8rem !important;
+    }
+    .navbar-collapse {
+        background-color: var(--brand-dark);
+        padding: 1rem;
+        margin-top: 0.5rem;
+        border-radius: 8px;
+        box-shadow: 0 10px 30px rgba(0,0,0,0.5);
     }
     /* Shop Page Header */
     .position-relative.d-flex[style*="height: 450px"] {
