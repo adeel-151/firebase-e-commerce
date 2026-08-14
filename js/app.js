@@ -96,16 +96,58 @@ async function fetchProducts() {
 function populateCategories(products) {
     if(!categoryFilter) return;
     const categories = [...new Set(products.map(p => p.category))];
-    const existingOptions = Array.from(categoryFilter.options).map(o => o.value);
     
-    categories.forEach(cat => {
-        if (!existingOptions.includes(cat)) {
-            const option = document.createElement('option');
-            option.value = cat;
-            option.textContent = cat;
-            categoryFilter.appendChild(option);
+    if (categoryFilter.tagName === 'SELECT') {
+        const existingOptions = Array.from(categoryFilter.options).map(o => o.value);
+        categories.forEach(cat => {
+            if (!existingOptions.includes(cat)) {
+                const option = document.createElement('option');
+                option.value = cat;
+                option.textContent = cat;
+                categoryFilter.appendChild(option);
+            }
+        });
+    } else {
+        categories.forEach(cat => {
+            if (!categoryFilter.querySelector(`button[data-category="${cat}"]`)) {
+                const btn = document.createElement('button');
+                btn.className = 'btn rounded-pill category-pill border-0 px-4 py-2 text-uppercase tracking-wider small text-muted';
+                btn.style.backgroundColor = 'transparent';
+                btn.dataset.category = cat;
+                btn.textContent = cat;
+                
+                btn.addEventListener('click', () => {
+                    categoryFilter.querySelectorAll('.category-pill').forEach(b => {
+                        b.classList.remove('bg-brand-dark', 'text-brand-gold', 'active');
+                        b.classList.add('text-muted');
+                        b.style.backgroundColor = 'transparent';
+                    });
+                    btn.classList.remove('text-muted');
+                    btn.classList.add('bg-brand-dark', 'text-brand-gold', 'active');
+                    btn.style.backgroundColor = '';
+                    applyFilters();
+                });
+                
+                categoryFilter.appendChild(btn);
+            }
+        });
+        
+        const allBtn = categoryFilter.querySelector('button[data-category="all"]');
+        if (allBtn && !allBtn.dataset.listenerAttached) {
+            allBtn.dataset.listenerAttached = 'true';
+            allBtn.addEventListener('click', () => {
+                categoryFilter.querySelectorAll('.category-pill').forEach(b => {
+                    b.classList.remove('bg-brand-dark', 'text-brand-gold', 'active');
+                    b.classList.add('text-muted');
+                    b.style.backgroundColor = 'transparent';
+                });
+                allBtn.classList.remove('text-muted');
+                allBtn.classList.add('bg-brand-dark', 'text-brand-gold', 'active');
+                allBtn.style.backgroundColor = '';
+                applyFilters();
+            });
         }
-    });
+    }
 }
 
 function renderProducts(productsToRender) {
@@ -165,7 +207,16 @@ function applyFilters() {
     }
     
     // Category
-    const category = categoryFilter ? categoryFilter.value : 'all';
+    let category = 'all';
+    if (categoryFilter) {
+        if (categoryFilter.tagName === 'SELECT') {
+            category = categoryFilter.value;
+        } else {
+            const activeBtn = categoryFilter.querySelector('.category-pill.active');
+            if (activeBtn) category = activeBtn.dataset.category;
+        }
+    }
+    
     if (category !== 'all') {
         filtered = filtered.filter(p => p.category === category);
     }
@@ -178,6 +229,12 @@ function applyFilters() {
         filtered.sort((a, b) => b.price - a.price);
     } else if (sort === 'name-asc') {
         filtered.sort((a, b) => a.title.localeCompare(b.title));
+    }
+    
+    // Results Counter
+    const resultsCounter = document.getElementById('resultsCounter');
+    if (resultsCounter) {
+        resultsCounter.textContent = `Showing ${filtered.length} results`;
     }
     
     renderProducts(filtered);
