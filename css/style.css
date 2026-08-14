@@ -252,6 +252,81 @@ body {
     background-color: var(--brand-gold);
 }
 
+/* Landing Page New Components */
+.carousel-item {
+    height: 100vh;
+}
+
+.carousel-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(to right, rgba(26,26,26,0.9) 0%, rgba(26,26,26,0.4) 50%, rgba(26,26,26,0) 100%);
+    z-index: 1;
+}
+
+.category-grid-item {
+    position: relative;
+    overflow: hidden;
+    display: block;
+    cursor: pointer;
+}
+
+.category-grid-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.8s ease;
+}
+
+.category-grid-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.4);
+    transition: background 0.4s ease;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    padding: 2rem;
+}
+
+.category-grid-item:hover .category-grid-img {
+    transform: scale(1.05);
+}
+
+.category-grid-item:hover .category-grid-overlay {
+    background: rgba(0, 0, 0, 0.2);
+}
+
+.philosophy-icon {
+    font-size: 2.5rem;
+    color: var(--brand-gold);
+    margin-bottom: 1.5rem;
+}
+
+.testimonial-card {
+    background: #1a1a1a;
+    border: 1px solid rgba(192, 160, 98, 0.2);
+    padding: 3rem 2rem;
+    position: relative;
+}
+
+.testimonial-card::before {
+    content: '\201C';
+    font-family: serif;
+    font-size: 6rem;
+    position: absolute;
+    top: -20px;
+    left: 20px;
+    color: rgba(192, 160, 98, 0.15);
+    line-height: 1;
+}
+
 .product-card-link:hover .product-card-img {
     transform: scale(1.05);
 }
