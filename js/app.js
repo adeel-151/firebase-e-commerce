@@ -130,21 +130,18 @@ function renderProducts(productsToRender) {
         const card = document.createElement('div');
         card.className = 'col';
         card.innerHTML = `
-            <div class="product-card">
-                <a href="product.html?id=${product.id}" class="product-card-link text-decoration-none">
-                    <span class="position-absolute top-0 start-0 m-3 bg-white bg-opacity-75 text-dark small fw-bold px-2 py-1 text-uppercase tracking-widest z-1">New</span>
-                    <img src="${product.image}" alt="${product.title}" class="product-card-img">
+            <div class="product-card-enhanced position-relative h-100 pb-3">
+                <a href="product.html?id=${product.id}" class="product-card-link text-decoration-none d-block position-relative overflow-hidden">
+                    <span class="position-absolute top-0 start-0 m-3 bg-brand-dark text-brand-gold small fw-bold px-3 py-1 text-uppercase tracking-widest z-1" style="font-size: 0.7rem;">New Arrival</span>
+                    <img src="${product.image}" alt="${product.title}" class="product-card-img w-100 object-fit-cover" style="height: 300px;">
+                    <button class="btn cart-overlay-btn" onclick="event.preventDefault(); window.addToCart('${product.id}')"><i class="fas fa-shopping-bag me-2"></i>Quick Add</button>
                 </a>
-                <div class="px-2 pt-3">
-                    <h3 class="fs-5 font-serif text-brand-dark mb-1">
+                <div class="px-4 pt-4 text-center">
+                    <p class="text-brand-gold small mb-1 tracking-widest text-uppercase">${product.category}</p>
+                    <h3 class="fs-5 font-serif text-brand-dark mb-2">
                         <a href="product.html?id=${product.id}" class="text-decoration-none text-brand-dark hover-gold transition-colors">${product.title}</a>
                     </h3>
-                    <div class="small fw-light text-brand-slate mb-3 text-uppercase tracking-wider">${product.category}</div>
-                    <div class="fs-5 fw-bold text-brand-dark mb-3">Rs.${product.price.toFixed(2)}</div>
-                    
-                    <button class="btn btn-add-cart w-100 py-2 text-uppercase tracking-widest small fw-bold d-flex justify-content-center align-items-center gap-2" onclick="window.addToCart('${product.id}')">
-                        <i class="fas fa-shopping-bag"></i> Add to Cart
-                    </button>
+                    <p class="fw-bold text-brand-dark fs-5 mb-0">Rs. ${product.price.toLocaleString()}</p>
                 </div>
             </div>
         `;
