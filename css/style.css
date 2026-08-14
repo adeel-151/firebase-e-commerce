@@ -1,0 +1,192 @@
+@import '@fontsource/inter/300.css';
+@import '@fontsource/inter/400.css';
+@import '@fontsource/inter/500.css';
+@import '@fontsource/inter/600.css';
+@import '@fontsource/inter/700.css';
+@import '@fontsource/playfair-display/400.css';
+@import '@fontsource/playfair-display/400-italic.css';
+@import '@fontsource/playfair-display/500.css';
+@import '@fontsource/playfair-display/600.css';
+@import '@fontsource/playfair-display/700.css';
+
+:root {
+    /* Colors */
+    --brand-dark: #1a1a1a;
+    --brand-gold: #c0a062;
+    --brand-beige: #f5f0e6;
+    --brand-slate: #5e6871;
+    --brand-light-sage: #e6ece5;
+    
+    /* Typography */
+    --font-sans: 'Inter', sans-serif;
+    --font-serif: 'Playfair Display', serif;
+}
+
+body {
+    font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+}
+
+/* Custom Utility Classes */
+.font-sans { font-family: var(--font-sans); }
+.font-serif { font-family: var(--font-serif); }
+
+.text-brand-dark { color: var(--brand-dark) !important; }
+.text-brand-gold { color: var(--brand-gold) !important; }
+.text-brand-beige { color: var(--brand-beige) !important; }
+.text-brand-slate { color: var(--brand-slate) !important; }
+
+.bg-brand-dark { background-color: var(--brand-dark) !important; }
+.bg-brand-dark-solid { background-color: rgba(26, 26, 26, 0.95) !important; backdrop-filter: blur(5px); }
+.brand-beige-bg { background-color: var(--brand-beige) !important; }
+.bg-brand-gold { background-color: var(--brand-gold) !important; }
+.bg-light-sage { background-color: var(--brand-light-sage) !important; }
+
+.border-top-gold { border-top: 16px solid var(--brand-gold) !important; }
+.tracking-widest { letter-spacing: 0.1em; }
+.tracking-wider { letter-spacing: 0.05em; }
+.max-w-1600 { max-width: 1600px; margin-left: auto; margin-right: auto; }
+.max-w-3xl { max-width: 48rem; }
+.max-w-xl { max-width: 36rem; }
+
+/* Transitions & Hover Effects */
+.transition-colors { transition: background-color 0.3s ease, color 0.3s ease, border-color 0.3s ease; }
+.transition-transform { transition: transform 0.7s ease; }
+.hover-gold:hover { color: var(--brand-gold) !important; }
+.hover-white:hover { color: #ffffff !important; }
+
+/* Hero Section */
+.hero-gradient {
+    background: linear-gradient(to right, rgba(26, 26, 26, 0.95) 0%, rgba(26, 26, 26, 0.6) 50%, transparent 100%);
+}
+@keyframes ken-burns {
+    0% { transform: scale(1); }
+    100% { transform: scale(1.15); }
+}
+.hero-img-cinematic {
+    animation: ken-burns 30s ease-out infinite alternate;
+}
+.hero-content {
+    animation: fadeInUp 1.5s ease forwards;
+    opacity: 0;
+    transform: translateY(30px);
+}
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+.btn-custom-hero {
+    color: var(--brand-dark);
+    background-color: #ffffff;
+    border: none;
+    transition: all 0.3s ease;
+}
+.btn-custom-hero:hover {
+    background-color: var(--brand-gold);
+    color: #ffffff;
+}
+
+/* Nav Links */
+.custom-nav-link {
+    transition: color 0.3s ease;
+}
+.custom-nav-link:hover {
+    color: var(--brand-gold) !important;
+}
+
+/* Product Cards */
+.product-card-link {
+    display: block;
+    position: relative;
+    width: 100%;
+    height: 350px;
+    overflow: hidden;
+    background-color: var(--brand-light-sage);
+    margin-bottom: 1rem;
+}
+.product-card-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.7s ease;
+}
+.product-card-link:hover .product-card-img {
+    transform: scale(1.05);
+}
+.btn-add-cart {
+    border: 1px solid var(--brand-dark);
+    color: var(--brand-dark);
+    background: transparent;
+    transition: all 0.3s ease;
+}
+.btn-add-cart:hover {
+    background-color: var(--brand-dark);
+    color: #ffffff;
+}
+
+/* Forms */
+.custom-input {
+    border-bottom: 1px solid rgba(94, 104, 113, 0.3) !important;
+}
+.custom-input:focus {
+    border-color: var(--brand-dark) !important;
+}
+.btn-custom-checkout {
+    background-color: var(--brand-dark);
+    color: #ffffff;
+    transition: background-color 0.3s ease;
+    border: none;
+}
+.btn-custom-checkout:hover {
+    background-color: var(--brand-gold);
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+::-webkit-scrollbar-track {
+    background: var(--brand-beige);
+}
+::-webkit-scrollbar-thumb {
+    background: var(--brand-gold);
+    border-radius: 4px;
+}
+::-webkit-scrollbar-thumb:hover {
+    background: var(--brand-dark);
+}
+
+/* Auth Dropdown (Custom implementation for user menu since Bootstrap dropdown requires specific markup that is dynamically rendered) */
+.user-menu-dropdown {
+    position: absolute;
+    right: 0;
+    margin-top: 0.5rem;
+    width: 12rem;
+    background-color: #ffffff;
+    border: 1px solid rgba(94, 104, 113, 0.1);
+    box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 1050;
+}
+.user-menu-wrapper:hover .user-menu-dropdown {
+    opacity: 1;
+    visibility: visible;
+}
+.dropdown-custom-item {
+    display: block;
+    padding: 0.75rem 1.5rem;
+    color: var(--brand-dark);
+    font-size: 0.75rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+.dropdown-custom-item:hover {
+    background-color: var(--brand-beige);
+}

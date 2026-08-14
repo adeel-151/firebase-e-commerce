@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shop | Lumière</title>
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="brand-beige-bg text-brand-dark font-sans d-flex flex-column min-vh-100">
+    <!-- Navbar (Solid Background for inside pages) -->
+    <nav class="navbar navbar-expand-md navbar-dark bg-brand-dark w-100 py-4">
+        <div class="container-fluid px-4 px-md-5 max-w-1600">
+            <!-- Left: Logo -->
+            <a class="navbar-brand fs-3 font-serif tracking-widest text-uppercase text-white" href="index.html">Lumière.</a>
+            
+            <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <i class="fas fa-bars text-white fs-4"></i>
+            </button>
+
+            <div class="collapse navbar-collapse justify-content-between align-items-center" id="navbarNav">
+                <!-- Search (Desktop) -->
+                <div class="d-none d-md-flex align-items-center border-bottom border-light pb-1 ms-5 w-25 search-bar-nav">
+                    <button id="searchBtn" class="btn btn-link text-white p-0 me-2 text-decoration-none"><i class="fas fa-search small"></i></button>
+                    <input type="text" id="searchInput" placeholder="Search..." class="bg-transparent border-0 text-white shadow-none form-control-sm w-100 placeholder-white">
+                </div>
+
+                <!-- Right: Links & Actions -->
+                <ul class="navbar-nav align-items-center gap-4 ms-auto font-light tracking-wider text-uppercase small mt-4 mt-md-0">
+                    <li class="nav-item">
+                        <a class="nav-link text-white custom-nav-link" href="index.html">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-brand-gold custom-nav-link fw-bold" href="shop.html">Shop</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-white custom-nav-link" href="about.html">About</a>
+                    </li>
+                    
+                    <li class="nav-item d-flex align-items-center gap-3 ms-md-3">
+                        <div class="user-menu" id="userMenu">
+                            <a href="auth/login.html" id="loginLink" class="text-white text-decoration-none custom-nav-link"><i class="far fa-user"></i></a>
+                        </div>
+                        <a href="cart.html" class="text-white text-decoration-none position-relative custom-nav-link">
+                            <i class="fas fa-shopping-bag"></i>
+                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-brand-gold text-dark" id="cartCount" style="display:none; font-size: 0.65rem;">
+                                0
+                            </span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Mobile Search -->
+    <div class="d-md-none bg-brand-dark p-3 collapse" id="mobileSearch">
+         <div class="d-flex align-items-center border-bottom border-light pb-1">
+            <button id="searchBtnMobile" class="btn btn-link text-white p-0 me-2 text-decoration-none"><i class="fas fa-search small"></i></button>
+            <input type="text" id="searchInputMobile" placeholder="Search..." class="bg-transparent border-0 text-white shadow-none form-control w-100 placeholder-white">
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <main class="w-100 flex-grow-1">
+        <!-- Page Header -->
+        <div class="bg-light-sage py-5 border-bottom border-secondary" style="border-color: rgba(94,104,113,0.2) !important;">
+            <div class="container-fluid px-4 px-md-5 max-w-1600">
+                <h1 class="display-4 font-serif text-brand-dark mb-2">Our Collection</h1>
+                <p class="text-muted fw-light fs-5 mb-0">Discover our carefully curated selection of premium goods.</p>
+            </div>
+        </div>
+
+        <section id="products" class="py-5 px-4 px-md-5 max-w-1600 mx-auto">
+            <div class="d-flex flex-column flex-md-row justify-content-between align-items-md-center border-bottom border-secondary pb-4 mb-5">
+                <div class="d-flex gap-3">
+                    <select id="categoryFilter" class="form-select bg-transparent border-0 border-bottom border-secondary rounded-0 shadow-none text-brand-dark fw-bold w-auto" style="min-width: 180px;">
+                        <option value="all">All Categories</option>
+                        <!-- Injected by JS -->
+                    </select>
+                </div>
+                <div class="d-flex gap-3 mt-4 mt-md-0">
+                    <select id="sortFilter" class="form-select bg-transparent border-0 border-bottom border-secondary rounded-0 shadow-none text-muted w-auto" style="min-width: 180px;">
+                        <option value="default">Sort By</option>
+                        <option value="price-asc">Price: Low to High</option>
+                        <option value="price-desc">Price: High to Low</option>
+                    </select>
+                </div>
+            </div>
+
+            <!-- Loading State -->
+            <div id="loadingProducts" class="text-center py-5 text-brand-gold">
+                <div class="spinner-border" role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>
+            </div>
+
+            <!-- Products Grid -->
+            <div class="row row-cols-1 row-cols-md-2 row-cols-lg-4 g-4 mb-5" id="productsGrid">
+                <!-- Product cards injected by JS -->
+            </div>
+            
+            <!-- Empty State -->
+            <div id="noProductsFound" class="d-none flex-column align-items-center justify-content-center py-5 text-muted">
+                <i class="fas fa-box-open display-1 mb-3 opacity-50"></i>
+                <h3 class="fs-4 font-serif text-brand-dark mb-2">No products found</h3>
+                <p class="mb-4">Try adjusting your search or filters.</p>
+                <button id="clearFiltersBtn" class="btn btn-outline-dark rounded-0 px-4 py-2 tracking-wider text-uppercase small">Clear Filters</button>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-brand-dark text-white pt-5 pb-4 mt-auto border-top-gold">
+        <div class="container-fluid px-4 px-md-5 max-w-1600 mt-5">
+            <div class="row g-5 mb-5">
+                <div class="col-12 col-md-6">
+                    <h3 class="fs-2 font-serif tracking-widest text-uppercase mb-4">Lumière.</h3>
+                    <p class="text-white-50 fw-light" style="max-width: 350px;">
+                        Curating the finest fabrics and essentials for the modern gentleman. Elevate your everyday style with our premium collection.
+                    </p>
+                    <div class="d-flex gap-3 mt-4">
+                        <a href="#" class="text-white-50 text-decoration-none hover-gold fs-5"><i class="fab fa-instagram"></i></a>
+                        <a href="#" class="text-white-50 text-decoration-none hover-gold fs-5"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#" class="text-white-50 text-decoration-none hover-gold fs-5"><i class="fab fa-twitter"></i></a>
+                    </div>
+                </div>
+                <div class="col-6 col-md-3">
+                    <h4 class="small tracking-widest text-uppercase text-brand-gold fw-bold mb-4">Shop</h4>
+                    <ul class="list-unstyled fw-light">
+                        <li class="mb-3"><a href="#" class="text-white-50 text-decoration-none hover-white">New Arrivals</a></li>
+                        <li class="mb-3"><a href="#" class="text-white-50 text-decoration-none hover-white">Boski Collection</a></li>
+                        <li class="mb-3"><a href="#" class="text-white-50 text-decoration-none hover-white">Wash & Wear</a></li>
+                        <li><a href="#" class="text-white-50 text-decoration-none hover-white">Accessories</a></li>
+                    </ul>
+                </div>
+                <div class="col-6 col-md-3">
+                    <h4 class="small tracking-widest text-uppercase text-brand-gold fw-bold mb-4">Support</h4>
+                    <ul class="list-unstyled fw-light">
+                        <li class="mb-3"><a href="#" class="text-white-50 text-decoration-none hover-white">Contact Us</a></li>
+                        <li class="mb-3"><a href="#" class="text-white-50 text-decoration-none hover-white">Shipping & Returns</a></li>
+                        <li class="mb-3"><a href="#" class="text-white-50 text-decoration-none hover-white">FAQs</a></li>
+                        <li><a href="#" class="text-white-50 text-decoration-none hover-white">Track Order</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="border-top border-secondary pt-4 d-flex flex-column flex-md-row justify-content-between align-items-center text-muted small fw-light">
+                <p class="mb-3 mb-md-0">&copy; 2024 Lumière. All rights reserved.</p>
+                <div class="d-flex gap-4">
+                    <a href="#" class="text-muted text-decoration-none hover-white">Privacy Policy</a>
+                    <a href="#" class="text-muted text-decoration-none hover-white">Terms of Service</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="js/firebase-config.js"></script>
+    <script type="module" src="js/app.js"></script>
+</body>
+</html>
