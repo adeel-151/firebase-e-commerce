@@ -16,6 +16,18 @@ function loadOrders() {
     
     onSnapshot(q, (snapshot) => {
         allOrders = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        
+        // Update order stats
+        const countAll = document.getElementById('orderCountAll');
+        const countPending = document.getElementById('orderCountPending');
+        const countShipped = document.getElementById('orderCountShipped');
+        const countDelivered = document.getElementById('orderCountDelivered');
+        
+        if (countAll) countAll.textContent = allOrders.length;
+        if (countPending) countPending.textContent = allOrders.filter(o => o.status === 'Pending').length;
+        if (countShipped) countShipped.textContent = allOrders.filter(o => o.status === 'Shipped').length;
+        if (countDelivered) countDelivered.textContent = allOrders.filter(o => o.status === 'Delivered').length;
+        
         applyFilters();
     }, (error) => {
         console.error("Error loading orders:", error);

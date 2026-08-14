@@ -3,171 +3,130 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin Dashboard | Lumière</title>
-    <!-- FontAwesome -->
+    <title>Dashboard | Lumière Admin</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <!-- Bootstrap 5 CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <!-- Custom CSS -->
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/admin.css">
 </head>
-<body class="brand-beige-bg font-sans">
-    <div class="d-flex min-vh-100">
+<body>
+    <div class="admin-layout">
         <!-- Sidebar -->
-        <aside class="bg-brand-dark text-white p-4" style="width: 250px; flex-shrink: 0;">
-            <div class="fs-4 font-serif text-brand-gold tracking-widest text-uppercase mb-5 border-bottom border-secondary pb-3">
-                Lumière Admin
-            </div>
-            <nav class="d-flex flex-column gap-3">
-                <a href="../index.html" class="text-white text-decoration-none bg-secondary bg-opacity-25 p-3 rounded fw-bold"><i class="fas fa-home me-2"></i> Dashboard</a>
-                <a href="products.html" class="text-white-50 text-decoration-none p-3 hover-white transition-colors"><i class="fas fa-box me-2"></i> Products</a>
-                <a href="orders.html" class="text-white-50 text-decoration-none p-3 hover-white transition-colors"><i class="fas fa-shopping-cart me-2"></i> Orders</a>
-                <a href="../index.html" target="_blank" class="text-white-50 text-decoration-none p-3 hover-white transition-colors"><i class="fas fa-external-link-alt me-2"></i> View Store</a>
+        <aside class="admin-sidebar">
+            <div class="admin-sidebar-header">Lumière Admin</div>
+            <nav class="admin-nav">
+                <a href="index.html" class="active"><i class="fas fa-chart-pie"></i> Dashboard</a>
+                <a href="products.html"><i class="fas fa-box"></i> Products</a>
+                <a href="orders.html"><i class="fas fa-shopping-bag"></i> Orders</a>
+                <div class="admin-nav-divider"></div>
+                <a href="../index.html" target="_blank"><i class="fas fa-external-link-alt"></i> View Store</a>
             </nav>
+            <div class="admin-sidebar-footer">
+                <a href="#" id="logoutBtnSidebar"><i class="fas fa-sign-out-alt"></i> Sign Out</a>
+            </div>
         </aside>
 
         <!-- Main Content -->
-        <main class="flex-grow-1 p-4 p-md-5">
-            <header class="d-flex justify-content-between align-items-center mb-5 pb-3 border-bottom border-light">
-                <h2 class="fs-3 font-serif text-brand-dark mb-0">Dashboard Overview</h2>
-                <div class="d-flex align-items-center gap-4">
-                    <span id="adminEmail" class="text-muted small fw-bold tracking-wider">admin@lumiere.com</span>
-                    <button id="logoutBtn" class="btn btn-outline-dark btn-sm rounded-0 tracking-widest text-uppercase">Logout</button>
+        <main class="admin-main">
+            <header class="admin-header">
+                <h2>Dashboard Overview</h2>
+                <div class="d-flex align-items-center gap-3">
+                    <span id="adminEmail" class="text-muted small fw-bold" style="letter-spacing: 0.05em;"></span>
+                    <button id="logoutBtn" class="btn btn-outline btn-sm">Logout</button>
                 </div>
             </header>
 
-            <div class="container-fluid p-0">
+            <div class="admin-content">
                 <!-- Stat Cards -->
-                <div class="row g-4 mb-5">
-                    <div class="col-md-4">
-                        <div class="bg-white p-4 shadow-sm border border-light h-100 d-flex align-items-center gap-4">
-                            <div class="bg-brand-beige text-brand-gold p-3 rounded-circle fs-3 d-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
-                                <i class="fas fa-box"></i>
-                            </div>
-                            <div>
-                                <h3 class="fs-6 text-uppercase tracking-widest text-muted mb-1">Total Products</h3>
-                                <div class="fs-2 font-serif text-brand-dark fw-bold" id="totalProducts">0</div>
+                <div class="row g-4 mb-4">
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="stat-card">
+                            <div class="stat-icon gold"><i class="fas fa-box"></i></div>
+                            <div class="stat-info">
+                                <h3>Total Products</h3>
+                                <div class="stat-value" id="totalProducts">0</div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="bg-white p-4 shadow-sm border border-light h-100 d-flex align-items-center gap-4">
-                            <div class="bg-brand-beige text-brand-gold p-3 rounded-circle fs-3 d-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
-                                <i class="fas fa-shopping-cart"></i>
-                            </div>
-                            <div>
-                                <h3 class="fs-6 text-uppercase tracking-widest text-muted mb-1">Total Orders</h3>
-                                <div class="fs-2 font-serif text-brand-dark fw-bold" id="totalOrders">0</div>
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="stat-card">
+                            <div class="stat-icon blue"><i class="fas fa-shopping-bag"></i></div>
+                            <div class="stat-info">
+                                <h3>Total Orders</h3>
+                                <div class="stat-value" id="totalOrders">0</div>
                             </div>
                         </div>
                     </div>
-                    <div class="col-md-4">
-                        <div class="bg-white p-4 shadow-sm border border-light h-100 d-flex align-items-center gap-4">
-                            <div class="bg-brand-beige text-brand-gold p-3 rounded-circle fs-3 d-flex align-items-center justify-content-center" style="width: 60px; height: 60px;">
-                                <i class="fas fa-dollar-sign"></i>
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="stat-card">
+                            <div class="stat-icon green"><i class="fas fa-dollar-sign"></i></div>
+                            <div class="stat-info">
+                                <h3>Total Revenue</h3>
+                                <div class="stat-value" id="totalSales">Rs. 0</div>
                             </div>
-                            <div>
-                                <h3 class="fs-6 text-uppercase tracking-widest text-muted mb-1">Total Sales</h3>
-                                <div class="fs-2 font-serif text-brand-dark fw-bold" id="totalSales">$0.00</div>
+                        </div>
+                    </div>
+                    <div class="col-sm-6 col-lg-3">
+                        <div class="stat-card">
+                            <div class="stat-icon purple"><i class="fas fa-users"></i></div>
+                            <div class="stat-info">
+                                <h3>Categories</h3>
+                                <div class="stat-value" id="totalCategories">0</div>
                             </div>
                         </div>
                     </div>
                 </div>
 
-                <!-- Recent Orders Preview -->
-                <div class="bg-white shadow-sm border border-light p-4">
-                    <div class="d-flex justify-content-between align-items-center mb-4">
-                        <h3 class="fs-5 font-serif text-brand-dark mb-0">Recent Orders</h3>
-                        <a href="orders.html" class="btn btn-dark btn-sm rounded-0 tracking-widest text-uppercase">View All</a>
+                <!-- Quick Actions -->
+                <div class="mb-4">
+                    <h3 style="font-family: 'Playfair Display', serif; font-size: 16px; margin-bottom: 16px; color: #1a1a1a;">Quick Actions</h3>
+                    <div class="quick-actions">
+                        <a href="products.html" class="quick-action-card">
+                            <i class="fas fa-plus-circle"></i>
+                            <span>Add Product</span>
+                        </a>
+                        <a href="orders.html" class="quick-action-card">
+                            <i class="fas fa-clipboard-list"></i>
+                            <span>Manage Orders</span>
+                        </a>
+                        <a href="../shop.html" target="_blank" class="quick-action-card">
+                            <i class="fas fa-store"></i>
+                            <span>View Shop</span>
+                        </a>
+                        <a href="../index.html" target="_blank" class="quick-action-card">
+                            <i class="fas fa-home"></i>
+                            <span>View Homepage</span>
+                        </a>
                     </div>
-                    <div class="table-responsive">
-                        <table class="table table-hover align-middle">
-                            <thead class="table-light">
-                                <tr>
-                                    <th class="text-uppercase tracking-widest small text-muted">Order ID</th>
-                                    <th class="text-uppercase tracking-widest small text-muted">Date</th>
-                                    <th class="text-uppercase tracking-widest small text-muted">Customer</th>
-                                    <th class="text-uppercase tracking-widest small text-muted">Total</th>
-                                    <th class="text-uppercase tracking-widest small text-muted">Status</th>
-                                </tr>
-                            </thead>
-                            <tbody id="recentOrdersBody">
-                                <tr><td colspan="5" class="text-center py-4 text-muted">Loading orders...</td></tr>
-                            </tbody>
-                        </table>
+                </div>
+
+                <!-- Recent Orders Table -->
+                <div class="data-table-container">
+                    <div class="data-table-header">
+                        <h3>Recent Orders</h3>
+                        <a href="orders.html" class="btn btn-outline btn-sm">View All <i class="fas fa-arrow-right ms-1"></i></a>
                     </div>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Order ID</th>
+                                <th>Date</th>
+                                <th>Customer</th>
+                                <th>Total</th>
+                                <th>Status</th>
+                            </tr>
+                        </thead>
+                        <tbody id="recentOrdersBody">
+                            <tr><td colspan="5" class="text-center" style="padding: 40px;">Loading orders...</td></tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
         </main>
     </div>
 
-    <!-- Bootstrap 5 JS Bundle -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <script type="module" src="../js/firebase-config.js"></script>
     <script type="module" src="../js/admin/dashboard.js"></script>
-            <!-- Mega Footer -->
-    <footer class="footer-mega pt-5 mt-5 bg-brand-dark" style="color: #f5f0e6;">
-        <div class="container-fluid px-4 px-md-5 max-w-1600 pt-4 pb-5">
-            <div class="row g-5">
-                <!-- Brand Info -->
-                <div class="col-lg-4 pe-lg-5">
-                    <a class="text-decoration-none fs-2 font-serif tracking-widest text-uppercase d-block mb-3" href="../index.html" style="color: var(--brand-gold);">Lumière.</a>
-                    <p class="mb-4 pe-lg-4 fw-light" style="line-height: 1.8; color: #a0aab2;">Curating the world's most exquisite fashion and fragrances. Elevate your everyday with our signature collections designed for the modern connoisseur.</p>
-                    <div class="d-flex gap-4">
-                        <a href="#" class="footer-social-icon" style="color: #f5f0e6; font-size: 1.2rem; transition: color 0.3s;"><i class="fab fa-facebook-f"></i></a>
-                        <a href="#" class="footer-social-icon" style="color: #f5f0e6; font-size: 1.2rem; transition: color 0.3s;"><i class="fab fa-instagram"></i></a>
-                        <a href="#" class="footer-social-icon" style="color: #f5f0e6; font-size: 1.2rem; transition: color 0.3s;"><i class="fab fa-twitter"></i></a>
-                        <a href="#" class="footer-social-icon" style="color: #f5f0e6; font-size: 1.2rem; transition: color 0.3s;"><i class="fab fa-pinterest-p"></i></a>
-                    </div>
-                </div>
-
-                <!-- Quick Links -->
-                <div class="col-6 col-lg-2">
-                    <h5 class="font-serif text-uppercase tracking-wider fs-6 mb-4" style="color: #f5f0e6;">Quick Links</h5>
-                    <div class="d-flex flex-column gap-3">
-                        <a href="../index.html" class="text-decoration-none fw-light footer-link-hover" style="color: #a0aab2;">Home</a>
-                        <a href="../shop.html" class="text-decoration-none fw-light footer-link-hover" style="color: #a0aab2;">Shop Collection</a>
-                        <a href="../about.html" class="text-decoration-none fw-light footer-link-hover" style="color: #a0aab2;">Our Story</a>
-                        <a href="../contact.html" class="text-decoration-none fw-light footer-link-hover" style="color: #a0aab2;">Contact Us</a>
-                    </div>
-                </div>
-
-                <!-- Customer Care -->
-                <div class="col-6 col-lg-2">
-                    <h5 class="font-serif text-uppercase tracking-wider fs-6 mb-4" style="color: #f5f0e6;">Customer Care</h5>
-                    <div class="d-flex flex-column gap-3">
-                        <a href="#" class="text-decoration-none fw-light footer-link-hover" style="color: #a0aab2;">FAQ</a>
-                        <a href="#" class="text-decoration-none fw-light footer-link-hover" style="color: #a0aab2;">Shipping & Returns</a>
-                        <a href="#" class="text-decoration-none fw-light footer-link-hover" style="color: #a0aab2;">Track Order</a>
-                        <a href="#" class="text-decoration-none fw-light footer-link-hover" style="color: #a0aab2;">Privacy Policy</a>
-                    </div>
-                </div>
-
-                <!-- Newsletter -->
-                <div class="col-lg-4">
-                    <h5 class="font-serif text-uppercase tracking-wider fs-6 mb-4" style="color: #f5f0e6;">Join The Club</h5>
-                    <p class="mb-4 fw-light" style="color: #a0aab2;">Subscribe to receive updates, access to exclusive deals, and more.</p>
-                    <form class="position-relative mt-4" onsubmit="event.preventDefault(); alert('Subscribed successfully!');">
-                        <input type="email" class="form-control bg-transparent border-0 border-bottom border-secondary rounded-0 shadow-none px-0 pb-2 text-white" placeholder="Enter your email address" required style="border-color: rgba(255,255,255,0.2) !important;">
-                        <button type="submit" class="btn position-absolute end-0 bottom-0 text-uppercase tracking-widest fw-bold p-0 pb-2" style="color: var(--brand-gold);">Subscribe</button>
-                    </form>
-                </div>
-            </div>
-        </div>
-        
-        <!-- Sub Footer -->
-        <div class="py-4" style="border-top: 1px solid rgba(255,255,255,0.05);">
-            <div class="container-fluid px-4 px-md-5 max-w-1600 d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
-                <p class="mb-0 small fw-light" style="color: #a0aab2;">&copy; 2024 Lumière. All rights reserved.</p>
-                <div class="d-flex gap-4 fs-5" style="color: #a0aab2;">
-                    <i class="fab fa-cc-visa transition-colors hover-white"></i>
-                    <i class="fab fa-cc-mastercard transition-colors hover-white"></i>
-                    <i class="fab fa-cc-paypal transition-colors hover-white"></i>
-                    <i class="fab fa-cc-amex transition-colors hover-white"></i>
-                </div>
-            </div>
-        </div>
-    </footer>
 </body>
 </html>

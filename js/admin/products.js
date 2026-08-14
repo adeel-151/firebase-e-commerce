@@ -116,6 +116,16 @@ function loadProducts() {
     // Real-time listener
     onSnapshot(collection(db, "products"), (snapshot) => {
         products = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        
+        // Update stats
+        const prodCountAll = document.getElementById('prodCountAll');
+        const prodCountCategories = document.getElementById('prodCountCategories');
+        if (prodCountAll) prodCountAll.textContent = products.length;
+        if (prodCountCategories) {
+            const cats = new Set(products.map(p => p.category).filter(Boolean));
+            prodCountCategories.textContent = cats.size;
+        }
+        
         renderProducts(products);
     }, (error) => {
         console.error("Error loading products:", error);

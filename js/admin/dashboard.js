@@ -4,9 +4,11 @@ import { collection, getDocs, query, orderBy, limit, onSnapshot } from "https://
 const totalProductsEl = document.getElementById('totalProducts');
 const totalOrdersEl = document.getElementById('totalOrders');
 const totalSalesEl = document.getElementById('totalSales');
+const totalCategoriesEl = document.getElementById('totalCategories');
 const recentOrdersBody = document.getElementById('recentOrdersBody');
 const adminEmail = document.getElementById('adminEmail');
 const logoutBtn = document.getElementById('logoutBtn');
+const logoutBtnSidebar = document.getElementById('logoutBtnSidebar');
 
 // Auth check
 auth.onAuthStateChanged(user => {
@@ -23,11 +25,22 @@ if (logoutBtn) {
     });
 }
 
+if (logoutBtnSidebar) {
+    logoutBtnSidebar.addEventListener('click', (e) => {
+        e.preventDefault();
+        auth.signOut().then(() => {
+            window.location.href = '../auth/login.html';
+        });
+    });
+}
+
 // Load Dashboard Data
 function loadDashboardData() {
-    // Total Products
+    // Total Products & Categories
     onSnapshot(collection(db, "products"), (snapshot) => {
         totalProductsEl.textContent = snapshot.size;
+        const cats = new Set(snapshot.docs.map(d => d.data().category).filter(Boolean));
+        if (totalCategoriesEl) totalCategoriesEl.textContent = cats.size;
     });
 
     // Orders & Sales
