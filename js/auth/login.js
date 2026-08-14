@@ -12,7 +12,7 @@ if (loginForm) {
         const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
         
-        errorMsg.classList.add('hidden');
+        errorMsg.classList.add('d-none');
         loginBtn.disabled = true;
         loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Signing in...';
         
@@ -27,7 +27,7 @@ if (loginForm) {
         } catch (error) {
             console.error("Login error:", error);
             errorMsg.textContent = "Invalid email or password. Please try again.";
-            errorMsg.classList.remove('hidden');
+            errorMsg.classList.remove('d-none');
             loginBtn.disabled = false;
             loginBtn.innerHTML = 'Sign In';
         }

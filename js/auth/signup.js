@@ -14,7 +14,7 @@ if (signupForm) {
         const email = document.getElementById('email').value;
         const password = document.getElementById('password').value;
         
-        errorMsg.classList.add('hidden');
+        errorMsg.classList.add('d-none');
         signupBtn.disabled = true;
         signupBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Creating account...';
         
@@ -40,7 +40,7 @@ if (signupForm) {
         } catch (error) {
             console.error("Signup error:", error);
             errorMsg.textContent = error.message;
-            errorMsg.classList.remove('hidden');
+            errorMsg.classList.remove('d-none');
             signupBtn.disabled = false;
             signupBtn.innerHTML = 'Create Account';
         }

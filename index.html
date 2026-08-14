@@ -14,7 +14,7 @@
 </head>
 <body class="brand-beige-bg text-brand-dark font-sans">
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-md navbar-dark bg-transparent position-absolute w-100 z-3 py-4">
+    <nav class="navbar navbar-expand-md navbar-dark bg-transparent fixed-top w-100 z-3 py-4 transition-all">
         <div class="container-fluid px-4 px-md-5 max-w-1600">
             <!-- Left: Logo -->
             <a class="navbar-brand fs-3 font-serif tracking-widest text-uppercase text-white" href="index.html">Lumière.</a>
@@ -44,14 +44,9 @@
                     
                     <li class="nav-item d-flex align-items-center gap-3 ms-md-3">
                         <div class="user-menu" id="userMenu">
-                            <a href="auth/login.html" id="loginLink" class="text-white text-decoration-none custom-nav-link"><i class="far fa-user"></i></a>
+                            <a href="auth/login.html" id="loginLink" class="text-white text-decoration-none"><div class="icon-wrapper"><i class="far fa-user"></i></div></a>
                         </div>
-                        <a href="cart.html" class="text-white text-decoration-none position-relative custom-nav-link">
-                            <i class="fas fa-shopping-bag"></i>
-                            <span class="position-absolute top-0 start-100 translate-middle badge rounded-pill bg-brand-gold text-dark" id="cartCount" style="display:none; font-size: 0.65rem;">
-                                0
-                            </span>
-                        </a>
+                        <a href="cart.html" class="text-white text-decoration-none position-relative"><div class="icon-wrapper"><i class="fas fa-shopping-cart"></i><span class="position-absolute badge rounded-pill bg-brand-gold text-dark cart-badge-custom" id="cartCount" style="display:none; font-size: 0.65rem;">0</span></div></a>
                     </li>
                 </ul>
             </div>

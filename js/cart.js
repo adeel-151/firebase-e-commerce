@@ -27,7 +27,7 @@ function loadCartPage() {
     const cart = JSON.parse(localStorage.getItem('lumiere_cart')) || [];
     
     if (cart.length === 0) {
-        cartContent.classList.add('hidden');
+        cartContent.classList.add('d-none');
         emptyCartMessage.classList.remove('d-none');
         emptyCartMessage.classList.add('d-flex');
         return;
@@ -127,7 +127,7 @@ if (checkoutBtn) {
                     <i class="fas fa-check-circle display-1 text-brand-gold mb-4"></i>
                     <h2 class="display-4 font-serif text-brand-dark mb-4">Order Confirmed!</h2>
                     <p class="text-muted fs-5 mb-5 mx-auto" style="max-width: 500px;">Thank you for your purchase. We'll send you an email with your order details shortly.</p>
-                    <a href="index.html#products" class="btn btn-dark rounded-0 px-5 py-3 tracking-widest text-uppercase fw-bold btn-custom-checkout">Continue Shopping</a>
+                    <a href="shop.html" class="btn btn-dark rounded-0 px-5 py-3 tracking-widest text-uppercase fw-bold btn-custom-checkout">Continue Shopping</a>
                 </div>
             `;
         } catch (error) {

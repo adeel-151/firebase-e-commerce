@@ -48,8 +48,8 @@ function updateNavigation(user, isAdmin) {
     if (userMenu) {
         userMenu.innerHTML = `
             <div class="user-menu-wrapper position-relative">
-                <button class="btn btn-link text-white text-decoration-none custom-nav-link fw-light text-uppercase tracking-widest small p-0 d-flex align-items-center gap-2 shadow-none">
-                    <i class="far fa-user"></i> Hi, ${name}
+                <button class="btn btn-link text-white text-decoration-none p-0 d-flex align-items-center shadow-none">
+                    <div class="icon-wrapper" title="Hi, ${name}"><i class="far fa-user"></i></div>
                 </button>
                 <div class="user-menu-dropdown">
                     ${isAdmin ? `<a href="${pathLevel}admin/index.html" class="dropdown-custom-item border-bottom border-light">Dashboard</a>` : ''}
@@ -75,7 +75,7 @@ function resetNavigation() {
     const loginPath = window.location.pathname.includes('/auth/') || window.location.pathname.includes('/admin/') ? '../auth/login.html' : 'auth/login.html';
     
     if (userMenu) {
-        userMenu.innerHTML = `<a href="${loginPath}" id="loginLink" class="text-white text-decoration-none custom-nav-link fw-light text-uppercase tracking-widest small d-flex align-items-center gap-2"><i class="far fa-user"></i> Login</a>`;
+        userMenu.innerHTML = `<a href="${loginPath}" id="loginLink" class="text-white text-decoration-none d-flex align-items-center"><div class="icon-wrapper" title="Login"><i class="far fa-user"></i></div></a>`;
     }
     if (mobileUserMenu) {
         mobileUserMenu.innerHTML = `<a href="${loginPath}" id="mobileLoginLink" class="d-block px-3 py-3 text-white text-decoration-none">Login</a>`;

@@ -28,13 +28,16 @@ async function fetchProducts() {
         if(loadingProducts) loadingProducts.style.display = 'block';
         if(productsGrid) productsGrid.innerHTML = '';
         if(noProductsFound) noProductsFound.classList.add('d-none');
+        try {
+            const q = query(collection(db, "products"), orderBy("createdAt", "desc"));
+            const snapshot = await getDocs(q);
+            allProducts = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
+        } catch (dbError) {
+            console.warn("Could not fetch products from Firestore, falling back to mock data.", dbError);
+            allProducts = []; // Trigger the auto-seed/fallback block below
+        }
         
-        const q = query(collection(db, "products"), orderBy("createdAt", "desc"));
-        const snapshot = await getDocs(q);
-        
-        allProducts = snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() }));
-        
-        // Auto-seed with Unsplash images if database is empty
+        // Auto-seed with Unsplash images if database is empty or failed
         if (allProducts.length === 0) {
             const defaultProducts = [
                 // Clothes & Garments
@@ -62,6 +65,8 @@ async function fetchProducts() {
             ];
             
             try {
+                // Only try to save if we haven't failed already
+                const q = query(collection(db, "products"), orderBy("createdAt", "desc"));
                 for (const p of defaultProducts) {
                     const { id, ...dataToSave } = p;
                     await addDoc(collection(db, "products"), {
@@ -69,7 +74,6 @@ async function fetchProducts() {
                         createdAt: serverTimestamp()
                     });
                 }
-                // Re-fetch after seeding
                 const snapshot2 = await getDocs(q);
                 allProducts = snapshot2.docs.map(doc => ({ id: doc.id, ...doc.data() }));
             } catch (seedError) {
@@ -241,5 +245,15 @@ document.addEventListener('DOMContentLoaded', () => {
     updateCartBadge();
     if (productsGrid) {
         fetchProducts();
+    }
+});
+
+// Sticky Navbar Scroll Effect
+document.addEventListener('scroll', () => {
+    const navbar = document.querySelector('.navbar');
+    if (navbar && window.scrollY > 50) {
+        navbar.classList.add('scrolled-nav');
+    } else if (navbar) {
+        navbar.classList.remove('scrolled-nav');
     }
 });

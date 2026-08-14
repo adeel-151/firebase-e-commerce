@@ -1,13 +1,4 @@
-@import '@fontsource/inter/300.css';
-@import '@fontsource/inter/400.css';
-@import '@fontsource/inter/500.css';
-@import '@fontsource/inter/600.css';
-@import '@fontsource/inter/700.css';
-@import '@fontsource/playfair-display/400.css';
-@import '@fontsource/playfair-display/400-italic.css';
-@import '@fontsource/playfair-display/500.css';
-@import '@fontsource/playfair-display/600.css';
-@import '@fontsource/playfair-display/700.css';
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap');
 
 :root {
     /* Colors */
@@ -110,8 +101,83 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    transition: transform 0.7s ease;
+    transition: transform 0.5s ease;
 }
+
+/* UI/UX Upgrades - Navbar & Typography */
+.transition-all {
+    transition: all 0.4s ease;
+}
+
+.scrolled-nav {
+    background-color: rgba(26, 26, 26, 0.9) !important;
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    padding-top: 1rem !important;
+    padding-bottom: 1rem !important;
+    border-bottom: 1px solid rgba(192, 160, 98, 0.15);
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+.search-bar-nav input:focus {
+    box-shadow: none !important;
+    outline: none !important;
+    background-color: rgba(255, 255, 255, 0.05) !important;
+    border-radius: 4px;
+}
+
+.custom-nav-link {
+    position: relative;
+    padding-bottom: 0.25rem;
+    font-weight: 500;
+    letter-spacing: 0.1em;
+}
+
+.custom-nav-link::after {
+    content: '';
+    position: absolute;
+    width: 0;
+    height: 2px;
+    bottom: 0;
+    left: 0;
+    background-color: var(--brand-gold);
+    transition: width 0.3s ease;
+}
+
+.custom-nav-link:hover::after,
+.nav-item.active .custom-nav-link::after {
+    width: 100%;
+}
+
+.icon-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    background-color: transparent;
+    position: relative;
+}
+
+.icon-wrapper:hover {
+    background-color: rgba(192, 160, 98, 0.15);
+    transform: scale(1.1);
+    color: var(--brand-gold) !important;
+}
+
+.icon-wrapper i {
+    font-size: 1.15rem;
+}
+
+.cart-badge-custom {
+    top: 5px !important;
+    right: 0px !important;
+    transform: translate(25%, -25%) !important;
+    border: 2px solid var(--brand-dark);
+}
+
 .product-card-link:hover .product-card-img {
     transform: scale(1.05);
 }
