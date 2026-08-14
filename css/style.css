@@ -373,49 +373,58 @@ body {
     line-height: 1;
 }
 
-/* Enhanced Product Cards */
-.product-card-enhanced {
-    background: #ffffff;
-    border: 1px solid rgba(0,0,0,0.05);
-    transition: all 0.4s ease;
-    border-radius: 4px;
-    overflow: hidden;
+/* Minimalist Product Cards */
+.product-card-minimal {
+    background: transparent;
+    border: none;
 }
 
-.product-card-enhanced:hover {
-    box-shadow: 0 15px 35px rgba(0,0,0,0.1);
-    transform: translateY(-5px);
+.product-image-container {
+    background: #f8f9fa;
 }
 
-.cart-overlay-btn {
+.product-image-overlay {
     position: absolute;
-    bottom: -50px;
-    left: 50%;
-    transform: translateX(-50%);
-    background: var(--brand-dark);
-    color: var(--brand-gold);
-    padding: 0.75rem 1.5rem;
-    border-radius: 30px;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: rgba(0,0,0,0.15);
+    z-index: 1;
     opacity: 0;
-    transition: all 0.3s ease;
-    white-space: nowrap;
-    border: 1px solid var(--brand-gold);
-    font-size: 0.85rem;
-    z-index: 5;
+    transition: opacity 0.4s ease;
+    pointer-events: none;
 }
 
-.product-card-enhanced:hover .cart-overlay-btn {
-    bottom: 20px;
+.product-card-minimal:hover .product-image-overlay {
     opacity: 1;
 }
 
-.cart-overlay-btn:hover {
-    background: var(--brand-gold);
-    color: var(--brand-dark);
+.product-card-minimal .product-card-img {
+    transition: transform 0.6s ease;
 }
 
-.product-card-link:hover .product-card-img {
-    transform: scale(1.05);
+.product-card-minimal:hover .product-card-img {
+    transform: scale(1.08);
+}
+
+.rectangle-cart-btn {
+    position: absolute;
+    bottom: -60px;
+    left: 0;
+    width: 100%;
+    background-color: var(--brand-dark);
+    color: var(--brand-gold);
+    border: none;
+    padding: 1rem 0;
+    transition: all 0.4s cubic-bezier(0.165, 0.84, 0.44, 1);
+    z-index: 2;
+}
+
+.product-card-minimal:hover .rectangle-cart-btn {
+    bottom: 0;
+}
+
+.rectangle-cart-btn:hover {
+    background-color: var(--brand-gold);
+    color: var(--brand-dark);
 }
 .btn-add-cart {
     border: 1px solid var(--brand-dark);
