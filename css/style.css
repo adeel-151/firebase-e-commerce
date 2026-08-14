@@ -242,16 +242,15 @@ body {
     margin-bottom: 1.5rem;
 }
 
-.btn-custom-hero {
+.btn-lumiere {
     background-color: var(--brand-gold) !important;
     color: var(--brand-dark) !important;
     border: 1px solid var(--brand-gold) !important;
     transition: all 0.3s ease;
-    padding: 1rem 3rem !important;
     font-size: 1.1rem;
 }
 
-.btn-custom-hero:hover {
+.btn-lumiere:hover {
     background-color: #ffffff !important;
     color: var(--brand-dark) !important;
     border-color: #ffffff !important;
