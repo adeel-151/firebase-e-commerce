@@ -4,13 +4,13 @@ import { getFirestore } from "https://www.gstatic.com/firebasejs/10.8.1/firebase
 
 // TODO: Replace with your actual Firebase project configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyDuJxaZySiRpysP0gw0smCn5zSdPWZuRWc",
-  authDomain: "e-commerce-3a5c4.firebaseapp.com",
-  projectId: "e-commerce-3a5c4",
-  storageBucket: "e-commerce-3a5c4.firebasestorage.app",
-  messagingSenderId: "684513960280",
-  appId: "1:684513960280:web:32f3b03cd2294d9db9452d",
-  measurementId: "G-BJ332MQC0T"
+  apiKey: "YOUR_API_KEY",
+  authDomain: "YOUR_AUTH_DOMAIN",
+  projectId: "YOUR_PROJECT_ID",
+  storageBucket: "YOUR_STORAGE_BUCKET",
+  messagingSenderId: "YOUR_MESSAGING_SENDER_ID",
+  appId: "YOUR_APP_ID",
+  measurementId: "YOUR_MEASUREMENT_ID"
 };
 
 // Initialize Firebase
