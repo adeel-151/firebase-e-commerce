@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Categories | Lumière Admin</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/admin.css">
+</head>
+<body>
+    <div class="admin-layout">
+        <!-- Sidebar -->
+        <aside class="admin-sidebar">
+            <div class="admin-sidebar-header">Lumière Admin</div>
+            <nav class="admin-nav">
+                <a href="index.html"><i class="fas fa-chart-pie"></i> Dashboard</a>
+                <a href="products.html"><i class="fas fa-box"></i> Products</a>
+                <a href="orders.html"><i class="fas fa-shopping-bag"></i> Orders</a>
+                <a href="categories.html" class="active"><i class="fas fa-tags"></i> Categories</a>
+                <a href="users.html"><i class="fas fa-users"></i> Users</a>
+                <div class="admin-nav-divider"></div>
+                <a href="../index.html" target="_blank"><i class="fas fa-external-link-alt"></i> View Store</a>
+            </nav>
+            <div class="admin-sidebar-footer">
+                <a href="#" id="logoutBtnSidebar"><i class="fas fa-sign-out-alt"></i> Sign Out</a>
+            </div>
+        </aside><div class="admin-sidebar-overlay" id="sidebarOverlay"></div>
+
+        <!-- Main Content -->
+        <main class="admin-main">
+            <header class="admin-header"><button class="admin-mobile-toggle" id="mobileToggle"><i class="fas fa-bars"></i></button>
+                <h2>Category Management</h2>
+                <button class="btn btn-primary" id="addCategoryBtn"><i class="fas fa-plus me-2"></i>Add Category</button>
+            </header>
+
+            <div class="admin-content">
+                <!-- Stats Row -->
+                <div class="row g-4 mb-4">
+                    <div class="col-sm-6 col-lg-4">
+                        <div class="stat-card">
+                            <div class="stat-icon blue"><i class="fas fa-tags"></i></div>
+                            <div class="stat-info">
+                                <h3>Total Categories</h3>
+                                <div class="stat-value" id="categoryCountAll">0</div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Categories Table -->
+                <div class="data-table-container">
+                    <div class="data-table-header">
+                        <h3>Product Categories</h3>
+                        <div class="search-bar" style="width: 280px;">
+                            <i class="fas fa-search" style="color: #a0aab2; font-size: 14px;"></i>
+                            <input type="text" id="categorySearch" placeholder="Search categories...">
+                        </div>
+                    </div>
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Description</th>
+                                <th>Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody id="categoriesTableBody">
+                            <tr><td colspan="3" class="text-center" style="padding: 40px;">Loading categories...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Category Modal -->
+    <div class="modal-overlay" id="categoryModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Add New Category</h3>
+                <button class="btn-close" id="closeCategoryModalBtn"><i class="fas fa-times"></i></button>
+            </div>
+            <div class="modal-body">
+                <form id="categoryForm">
+                    <input type="hidden" id="categoryId">
+                    <div class="form-group">
+                        <label for="categoryName">Category Name</label>
+                        <input type="text" id="categoryName" class="form-control" placeholder="e.g. Winter Collection" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="categoryDesc">Description (Optional)</label>
+                        <textarea id="categoryDesc" class="form-control" rows="3" placeholder="Brief description..."></textarea>
+                    </div>
+                    <div style="display: flex; justify-content: flex-end; gap: 12px; margin-top: 24px; padding-top: 16px; border-top: 1px solid #e9ecef;">
+                        <button type="button" class="btn btn-secondary" id="cancelCategoryModalBtn">Cancel</button>
+                        <button type="submit" class="btn btn-primary" id="saveCategoryBtn"><i class="fas fa-save me-2"></i>Save Category</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="module" src="../js/firebase-config.js"></script>
+    <script type="module" src="../js/admin/categories.js"></script>
+    <script>
+    const mobileToggle = document.getElementById('mobileToggle');
+    const sidebar = document.querySelector('.admin-sidebar');
+    const overlay = document.getElementById('sidebarOverlay');
+    if (mobileToggle) {
+        mobileToggle.addEventListener('click', () => {
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('active');
+        });
+    }
+    if (overlay) {
+        overlay.addEventListener('click', () => {
+            sidebar.classList.remove('open');
+            overlay.classList.remove('active');
+        });
+    }
+    </script>
+</body>
+</html>

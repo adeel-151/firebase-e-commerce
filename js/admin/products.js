@@ -44,10 +44,30 @@ if (addProductBtn) {
     });
 
     // Initial load
+    loadCategoriesForSelect();
     loadProducts();
 }
 
 // Functions
+async function loadCategoriesForSelect() {
+    const categorySelect = document.getElementById('category');
+    if (!categorySelect) return;
+    
+    try {
+        const snapshot = await getDocs(collection(db, "categories"));
+        const categories = snapshot.docs.map(doc => doc.data().name).sort();
+        
+        categorySelect.innerHTML = '<option value="">Select Category</option>';
+        categories.forEach(cat => {
+            const opt = document.createElement('option');
+            opt.value = cat;
+            opt.textContent = cat;
+            categorySelect.appendChild(opt);
+        });
+    } catch (error) {
+        console.error("Error loading categories for select:", error);
+    }
+}
 function openModal(product = null) {
     productModal.classList.add('active');
     if (product) {

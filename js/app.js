@@ -282,20 +282,62 @@ window.addToCart = (productId) => {
     localStorage.setItem('lumiere_cart', JSON.stringify(cart));
     
     // Show feedback
-    const btn = event.currentTarget;
-    const originalText = btn.innerHTML;
-    const originalClasses = btn.className;
+    if (window.event && window.event.currentTarget) {
+        const btn = window.event.currentTarget;
+        const originalText = btn.innerHTML;
+        const originalClasses = btn.className;
+        
+        btn.innerHTML = '<i class="fas fa-check"></i> Added';
+        btn.className = 'btn bg-brand-gold text-white w-100 py-2 text-uppercase tracking-widest small fw-bold d-flex justify-content-center align-items-center gap-2 transition-colors';
+        
+        setTimeout(() => {
+            btn.innerHTML = originalText;
+            btn.className = originalClasses;
+        }, 1500);
+    }
     
-    btn.innerHTML = '<i class="fas fa-check"></i> Added';
-    btn.className = 'btn bg-brand-gold text-white w-100 py-2 text-uppercase tracking-widest small fw-bold d-flex justify-content-center align-items-center gap-2 transition-colors';
-    
-    setTimeout(() => {
-        btn.innerHTML = originalText;
-        btn.className = originalClasses;
-    }, 1500);
+    showToast('Item Added', `${product.title} was added to your cart.`);
     
     updateCartBadge();
 };
+
+// Utility: Show Toast
+function showToast(title, message) {
+    let toastContainer = document.getElementById('toast-container');
+    if (!toastContainer) {
+        toastContainer = document.createElement('div');
+        toastContainer.id = 'toast-container';
+        toastContainer.className = 'toast-container position-fixed bottom-0 end-0 p-4';
+        toastContainer.style.zIndex = '1060';
+        document.body.appendChild(toastContainer);
+    }
+    
+    const toastEl = document.createElement('div');
+    toastEl.className = 'toast align-items-center text-bg-dark border border-secondary rounded-0 shadow-lg mb-3';
+    toastEl.setAttribute('role', 'alert');
+    toastEl.setAttribute('aria-live', 'assertive');
+    toastEl.setAttribute('aria-atomic', 'true');
+    
+    toastEl.innerHTML = `
+        <div class="d-flex">
+            <div class="toast-body d-flex flex-column py-2">
+                <strong class="text-brand-gold mb-1 font-serif fs-6 tracking-widest text-uppercase">${title}</strong>
+                <span class="small fw-light">${message}</span>
+            </div>
+            <button type="button" class="btn-close btn-close-white me-3 m-auto shadow-none" data-bs-dismiss="toast" aria-label="Close"></button>
+        </div>
+    `;
+    
+    toastContainer.appendChild(toastEl);
+    
+    const toast = new bootstrap.Toast(toastEl, { delay: 3000 });
+    toast.show();
+    
+    toastEl.addEventListener('hidden.bs.toast', () => {
+        toastEl.remove();
+    });
+}
+
 
 // Initialize
 document.addEventListener('DOMContentLoaded', () => {

@@ -36,11 +36,14 @@ if (logoutBtnSidebar) {
 
 // Load Dashboard Data
 function loadDashboardData() {
-    // Total Products & Categories
+    // Total Products
     onSnapshot(collection(db, "products"), (snapshot) => {
         totalProductsEl.textContent = snapshot.size;
-        const cats = new Set(snapshot.docs.map(d => d.data().category).filter(Boolean));
-        if (totalCategoriesEl) totalCategoriesEl.textContent = cats.size;
+    });
+    
+    // Categories
+    onSnapshot(collection(db, "categories"), (snapshot) => {
+        if (totalCategoriesEl) totalCategoriesEl.textContent = snapshot.size;
     });
 
     // Orders & Sales
@@ -48,10 +51,30 @@ function loadDashboardData() {
         totalOrdersEl.textContent = snapshot.size;
         
         let total = 0;
+        const last7Days = {};
+        
+        // Initialize last 7 days array
+        for(let i=6; i>=0; i--) {
+            const d = new Date();
+            d.setDate(d.getDate() - i);
+            last7Days[d.toLocaleDateString()] = 0;
+        }
+
         snapshot.docs.forEach(doc => {
-            total += doc.data().total || 0;
+            const order = doc.data();
+            total += order.total || 0;
+            
+            if (order.createdAt && order.createdAt.toDate) {
+                const orderDate = order.createdAt.toDate().toLocaleDateString();
+                if (last7Days[orderDate] !== undefined) {
+                    last7Days[orderDate] += (order.total || 0);
+                }
+            }
         });
         totalSalesEl.textContent = `$${total.toFixed(2)}`;
+        
+        // Render Chart
+        renderChart(last7Days);
     });
 
     // Recent Orders
@@ -64,18 +87,57 @@ function loadDashboardData() {
 
         recentOrdersBody.innerHTML = snapshot.docs.map(doc => {
             const order = doc.data();
-            const date = order.createdAt ? order.createdAt.toDate().toLocaleDateString() : 'N/A';
-            const statusClass = order.status.toLowerCase();
+            const date = order.createdAt && order.createdAt.toDate ? order.createdAt.toDate().toLocaleDateString() : 'N/A';
+            const statusClass = order.status ? order.status.toLowerCase() : 'pending';
             return `
                 <tr>
                     <td>#${doc.id.slice(0, 8)}</td>
                     <td>${date}</td>
                     <td>${order.userEmail}</td>
                     <td>$${(order.total || 0).toFixed(2)}</td>
-                    <td><span class="badge ${statusClass}">${order.status}</span></td>
+                    <td><span class="badge ${statusClass}">${order.status || 'Pending'}</span></td>
                 </tr>
             `;
         }).join('');
+    });
+}
+
+let chartInstance = null;
+function renderChart(dataMap) {
+    const ctx = document.getElementById('revenueChart');
+    if (!ctx) return;
+    
+    const labels = Object.keys(dataMap);
+    const data = Object.values(dataMap);
+    
+    if (chartInstance) {
+        chartInstance.destroy();
+    }
+    
+    chartInstance = new Chart(ctx, {
+        type: 'line',
+        data: {
+            labels: labels,
+            datasets: [{
+                label: 'Revenue ($)',
+                data: data,
+                borderColor: '#c0a062',
+                backgroundColor: 'rgba(192, 160, 98, 0.1)',
+                borderWidth: 2,
+                fill: true,
+                tension: 0.4
+            }]
+        },
+        options: {
+            responsive: true,
+            maintainAspectRatio: false,
+            plugins: {
+                legend: { display: false }
+            },
+            scales: {
+                y: { beginAtZero: true }
+            }
+        }
     });
 }
 

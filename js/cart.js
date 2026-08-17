@@ -143,3 +143,11 @@ document.addEventListener('DOMContentLoaded', () => {
     updateCartBadge();
     loadCartPage();
 });
+
+// Sync cart across multiple tabs
+window.addEventListener('storage', (e) => {
+    if (e.key === 'lumiere_cart') {
+        updateCartBadge();
+        loadCartPage();
+    }
+});
