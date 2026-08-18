@@ -164,7 +164,7 @@ function renderProducts(productsToRender) {
             <td><img src="${product.image}" alt="${product.title}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 4px;"></td>
             <td><strong>${product.title}</strong></td>
             <td>${product.category}</td>
-            <td>$${product.price.toFixed(2)}</td>
+            <td>PKR ${product.price.toFixed(2)}</td>
             <td class="action-btns">
                 <button class="btn-icon edit" onclick="window.editProduct('${product.id}')"><i class="fas fa-edit"></i></button>
                 <button class="btn-icon delete" onclick="window.deleteProduct('${product.id}')"><i class="fas fa-trash"></i></button>

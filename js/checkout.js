@@ -52,13 +52,13 @@ function renderOrderSummary() {
                     <div class="font-serif fw-bold" style="font-size: 14px;">${item.title}</div>
                     <div class="text-muted small">Qty: ${item.quantity}</div>
                 </div>
-                <div class="fw-bold" style="font-size: 14px;">Rs.${(item.price * item.quantity).toFixed(2)}</div>
+                <div class="fw-bold" style="font-size: 14px;">PKR ${(item.price * item.quantity).toFixed(2)}</div>
             </div>
         `;
     });
     
-    checkoutSubtotal.textContent = `Rs.${cartTotal.toFixed(2)}`;
-    checkoutTotal.textContent = `Rs.${cartTotal.toFixed(2)}`;
+    checkoutSubtotal.textContent = `PKR ${cartTotal.toFixed(2)}`;
+    checkoutTotal.textContent = `PKR ${cartTotal.toFixed(2)}`;
 }
 
 function setupPaymentToggle() {

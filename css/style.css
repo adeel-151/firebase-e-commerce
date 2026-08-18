@@ -921,9 +921,7 @@ body {
 }
 
 /* Custom Magnetic Cursor */
-body {
-    cursor: none; /* Hide default cursor */
-}
+/* Cursor hiding is now handled by js/animations.js to prevent admin panel bugs */
 
 .cursor-dot,
 .cursor-outline {

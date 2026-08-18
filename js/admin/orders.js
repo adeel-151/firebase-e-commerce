@@ -52,7 +52,7 @@ function renderOrders(orders) {
                 <td>${date}</td>
                 <td>${order.userEmail}</td>
                 <td>${itemCount}</td>
-                <td>$${(order.total || 0).toFixed(2)}</td>
+                <td>PKR ${(order.total || 0).toFixed(2)}</td>
                 <td><span class="badge ${statusClass}">${order.status}</span></td>
                 <td>
                     <button class="btn btn-secondary" style="padding: 5px 10px; font-size: 12px;" onclick="window.viewOrder('${order.id}')">View / Update</button>
@@ -84,7 +84,7 @@ window.viewOrder = (id) => {
     document.getElementById('modalOrderId').textContent = `(#${currentOrder.id})`;
     document.getElementById('modalCustomerEmail').textContent = currentOrder.userEmail;
     document.getElementById('modalOrderDate').textContent = currentOrder.createdAt ? currentOrder.createdAt.toDate().toLocaleString() : 'N/A';
-    document.getElementById('modalOrderTotal').textContent = `$${(currentOrder.total || 0).toFixed(2)}`;
+    document.getElementById('modalOrderTotal').textContent = `PKR ${(currentOrder.total || 0).toFixed(2)}`;
     
     // New Fields
     document.getElementById('modalPaymentMethod').textContent = currentOrder.paymentMethod || 'N/A';
@@ -106,9 +106,9 @@ window.viewOrder = (id) => {
                 <img src="${item.image}" alt="${item.title}" style="width: 50px; height: 50px; object-fit: cover; border-radius: 4px;">
                 <div style="flex: 1;">
                     <div style="font-weight: 500;">${item.title}</div>
-                    <div style="color: var(--text-light); font-size: 14px;">Qty: ${item.quantity} x $${item.price.toFixed(2)}</div>
+                    <div style="color: var(--text-light); font-size: 14px;">Qty: ${item.quantity} x PKR ${item.price.toFixed(2)}</div>
                 </div>
-                <div style="font-weight: 600;">$${(item.quantity * item.price).toFixed(2)}</div>
+                <div style="font-weight: 600;">PKR ${(item.quantity * item.price).toFixed(2)}</div>
             </li>
         `).join('');
     } else {

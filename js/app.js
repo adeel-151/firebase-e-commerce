@@ -82,7 +82,7 @@ async function fetchProducts() {
             }
         }
 
-        populateCategories(allProducts);
+        await populateCategories();
         renderProducts(allProducts);
         
     } catch (error) {
@@ -93,9 +93,17 @@ async function fetchProducts() {
     }
 }
 
-function populateCategories(products) {
+async function populateCategories() {
     if(!categoryFilter) return;
-    const categories = [...new Set(products.map(p => p.category))];
+    
+    let categories = [];
+    try {
+        const snapshot = await getDocs(collection(db, "categories"));
+        categories = snapshot.docs.map(doc => doc.data().name).sort();
+    } catch (e) {
+        console.warn("Could not load categories from db, falling back to product categories");
+        categories = [...new Set(allProducts.map(p => p.category))].sort();
+    }
     
     if (categoryFilter.tagName === 'SELECT') {
         const existingOptions = Array.from(categoryFilter.options).map(o => o.value);
@@ -186,7 +194,7 @@ function renderProducts(productsToRender) {
                     <h3 class="fs-5 font-serif text-brand-dark mb-1">
                         <a href="product.html?id=${product.id}" class="text-decoration-none text-brand-dark hover-gold transition-colors">${product.title}</a>
                     </h3>
-                    <p class="fw-light text-brand-dark fs-6 mb-0">Rs. ${product.price.toLocaleString()}</p>
+                    <p class="fw-light text-brand-dark fs-6 mb-0">PKR ${product.price.toLocaleString()}</p>
                 </div>
             </div>
         `;

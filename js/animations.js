@@ -86,6 +86,9 @@ document.addEventListener("DOMContentLoaded", () => {
     const cursorOutline = document.querySelector('.cursor-outline');
 
     if (cursorDot && cursorOutline && window.innerWidth > 768) {
+        // Hide default cursor only if custom cursor is active (prevents admin panel bug)
+        document.body.style.cursor = 'none';
+        
         let mouseX = window.innerWidth / 2;
         let mouseY = window.innerHeight / 2;
         let outlineX = mouseX;

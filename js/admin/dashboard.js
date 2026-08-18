@@ -71,7 +71,7 @@ function loadDashboardData() {
                 }
             }
         });
-        totalSalesEl.textContent = `$${total.toFixed(2)}`;
+        totalSalesEl.textContent = `PKR ${total.toFixed(2)}`;
         
         // Render Chart
         renderChart(last7Days);
@@ -94,7 +94,7 @@ function loadDashboardData() {
                     <td>#${doc.id.slice(0, 8)}</td>
                     <td>${date}</td>
                     <td>${order.userEmail}</td>
-                    <td>$${(order.total || 0).toFixed(2)}</td>
+                    <td>PKR ${(order.total || 0).toFixed(2)}</td>
                     <td><span class="badge ${statusClass}">${order.status || 'Pending'}</span></td>
                 </tr>
             `;
@@ -119,7 +119,7 @@ function renderChart(dataMap) {
         data: {
             labels: labels,
             datasets: [{
-                label: 'Revenue ($)',
+                label: 'Revenue (PKR)',
                 data: data,
                 borderColor: '#c0a062',
                 backgroundColor: 'rgba(192, 160, 98, 0.1)',

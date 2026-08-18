@@ -47,7 +47,7 @@ function loadCartPage() {
             <img src="${item.image}" alt="${item.title}" class="object-fit-cover" style="width: 100px; height: 100px;">
             <div class="flex-grow-1 text-center text-sm-start">
                 <div class="fs-5 font-serif text-brand-dark mb-1">${item.title}</div>
-                <div class="fw-bold text-brand-dark">Rs.${item.price.toFixed(2)}</div>
+                <div class="fw-bold text-brand-dark">PKR ${item.price.toFixed(2)}</div>
             </div>
             <div class="d-flex align-items-center gap-4 mt-3 mt-sm-0">
                 <input type="number" class="form-control text-center rounded-0 shadow-none border-secondary custom-input" style="width: 80px;" value="${item.quantity}" min="1" max="99" onchange="window.updateCartItem('${item.id}', this.value)">
@@ -57,8 +57,8 @@ function loadCartPage() {
         cartItemsContainer.appendChild(itemEl);
     });
     
-    subtotalAmount.textContent = `Rs.${subtotal.toFixed(2)}`;
-    totalAmount.textContent = `Rs.${subtotal.toFixed(2)}`;
+    subtotalAmount.textContent = `PKR ${subtotal.toFixed(2)}`;
+    totalAmount.textContent = `PKR ${subtotal.toFixed(2)}`;
     
     // Check auth for checkout (Removed for Guest Checkout)
     // Auth is no longer required to checkout.
