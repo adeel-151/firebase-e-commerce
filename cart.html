@@ -122,9 +122,9 @@
     <!-- Custom CSS -->
     <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="brand-beige-bg text-brand-dark font-sans">
+<body class="brand-beige-bg text-brand-dark font-sans d-flex flex-column min-vh-100">
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-md navbar-dark bg-brand-dark-solid position-sticky top-0 w-100 z-3 py-4 shadow-sm">
+    <nav class="navbar navbar-expand-md navbar-dark bg-brand-dark sticky-top w-100 py-4 transition-all z-3 shadow-sm">
         <div class="container-fluid px-4 px-md-5 max-w-1600">
             <!-- Left: Logo -->
             <a class="navbar-brand fs-3 font-serif tracking-widest text-uppercase text-brand-beige" href="index.html">Lumière.</a>
@@ -177,7 +177,7 @@
     </div>
 
     <!-- Main Content -->
-    <main class="container-fluid max-w-1600 px-4 px-md-5 py-5 my-5">
+    <main class="container-fluid max-w-1600 px-4 px-md-5 py-5 my-5 flex-grow-1">
         <h1 class="display-4 font-serif text-brand-dark mb-5">Shopping Cart</h1>
         
         <div id="emptyCartMessage" class="d-none flex-column align-items-center justify-content-center py-5 text-muted">
@@ -193,7 +193,7 @@
             </div>
             
             <div class="col-lg-4">
-                <div class="bg-light-sage p-4 p-md-5 h-100">
+                <div class="bg-light-sage p-4 p-md-5 position-sticky" style="top: 120px;">
                     <h3 class="fs-4 font-serif text-brand-dark mb-4 border-bottom border-secondary pb-3">Order Summary</h3>
                     
                     <div class="d-flex justify-content-between align-items-center mb-3 text-muted">
