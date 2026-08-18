@@ -865,3 +865,123 @@ body {
         font-size: 1.1rem !important;
     }
 }
+
+/* ==========================================================================
+   HIGH-END GSAP & LENIS ANIMATIONS
+   ========================================================================== */
+
+/* Preloader */
+.preloader {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--brand-dark-solid);
+    z-index: 9999;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform-origin: top;
+}
+
+.preloader-content {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+}
+
+.preloader-text {
+    opacity: 0; /* Animated by GSAP */
+}
+
+.preloader-progress {
+    width: 200px;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.1);
+    position: relative;
+    overflow: hidden;
+}
+
+.preloader-bar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0%;
+    background: var(--brand-gold);
+}
+
+.preloader-percentage {
+    color: var(--brand-gold);
+    font-size: 14px;
+    letter-spacing: 2px;
+}
+
+/* Custom Magnetic Cursor */
+body {
+    cursor: none; /* Hide default cursor */
+}
+
+.cursor-dot,
+.cursor-outline {
+    position: fixed;
+    top: 0;
+    left: 0;
+    transform: translate(-50%, -50%);
+    border-radius: 50%;
+    z-index: 10000;
+    pointer-events: none;
+}
+
+.cursor-dot {
+    width: 8px;
+    height: 8px;
+    background-color: var(--brand-gold);
+}
+
+.cursor-outline {
+    width: 40px;
+    height: 40px;
+    border: 1px solid rgba(192, 160, 98, 0.5); /* Brand gold with opacity */
+    transition: width 0.2s, height 0.2s, background-color 0.2s;
+}
+
+/* Cursor Hover States */
+.cursor-outline.hover-active {
+    width: 60px;
+    height: 60px;
+    background-color: rgba(192, 160, 98, 0.1);
+    border-color: transparent;
+    backdrop-filter: blur(2px);
+}
+
+/* Lenis Smooth Scroll Recommended CSS */
+html.lenis {
+    height: auto;
+}
+.lenis.lenis-smooth {
+    scroll-behavior: auto !important;
+}
+.lenis.lenis-smooth [data-lenis-prevent] {
+    overscroll-behavior: contain;
+}
+.lenis.lenis-stopped {
+    overflow: hidden;
+}
+.lenis.lenis-scrolling iframe {
+    pointer-events: none;
+}
+
+/* GSAP Reveal Classes */
+.reveal-up {
+    opacity: 0;
+    transform: translateY(50px);
+}
+
+/* Magnetic Items Base */
+.magnetic {
+    display: inline-block;
+}
