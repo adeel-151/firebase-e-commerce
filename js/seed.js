@@ -37,10 +37,10 @@ if (seedBtn) {
         seedStatus.classList.add('d-none');
         
         try {
-            await createAccount('admin@example.com', 'admin123', 'Admin User', 'admin');
-            await createAccount('user@example.com', 'user123', 'Dummy User', 'customer');
+            await createAccount('superadmin@lumiere.com', 'admin123', 'Super Admin', 'admin');
+            await createAccount('testuser@lumiere.com', 'user123', 'Test User', 'customer');
             
-            seedStatus.textContent = 'Successfully created Admin and User dummy accounts! You can now login.';
+            seedStatus.innerHTML = 'Successfully created accounts!<br><strong>Admin:</strong> superadmin@lumiere.com / admin123<br><strong>User:</strong> testuser@lumiere.com / user123';
             seedStatus.className = 'alert alert-success mt-3';
         } catch (error) {
             seedStatus.textContent = 'Error creating accounts. Check console.';
