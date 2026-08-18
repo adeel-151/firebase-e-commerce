@@ -16,14 +16,22 @@
 </head>
 <body class="brand-beige-bg text-brand-dark font-sans">
     
-    <!-- Preloader -->
-    <div class="preloader">
-        <div class="preloader-content">
-            <h1 class="font-serif text-brand-gold display-1 tracking-widest text-uppercase preloader-text">Lumière.</h1>
-            <div class="preloader-progress">
-                <div class="preloader-bar"></div>
+    <!-- Premium Preloader -->
+    <div class="preloader position-fixed top-0 start-0 w-100 h-100 z-3" style="z-index: 9999 !important;">
+        <!-- Background slices for reveal -->
+        <div class="preloader-slice bg-brand-dark position-absolute top-0 w-100 h-100" style="left: 0%;"></div>
+        
+        <!-- Content -->
+        <div class="preloader-content position-absolute top-50 start-50 translate-middle text-center w-100 d-flex flex-column align-items-center justify-content-center" style="height: 100vh;">
+            <div class="overflow-hidden mb-4">
+                <h1 class="preloader-logo display-1 font-serif text-brand-gold tracking-widest text-uppercase" style="opacity: 0; transform: translateY(100%);">Lumière.</h1>
             </div>
-            <div class="preloader-percentage font-serif">0%</div>
+            <div class="preloader-progress-wrapper d-flex align-items-center gap-3" style="opacity: 0;">
+                <div class="preloader-progress-bar-container" style="width: 150px; height: 1px; background: rgba(192, 160, 98, 0.2); position: relative;">
+                    <div class="preloader-progress-bar h-100 bg-brand-gold" style="width: 0%; position: absolute; left: 0; top: 0; transition: width 0.1s linear;"></div>
+                </div>
+                <div class="preloader-percentage text-brand-gold tracking-widest small font-monospace">0%</div>
+            </div>
         </div>
     </div>
 

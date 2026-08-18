@@ -42,34 +42,54 @@ document.addEventListener("DOMContentLoaded", () => {
 
         const tl = gsap.timeline();
         
-        // Simulate loading progress
         let progress = { value: 0 };
         const percentText = document.querySelector('.preloader-percentage');
         
-        tl.to(progress, {
+        tl.to('.preloader-progress-wrapper', {
+            opacity: 1,
+            duration: 0.5,
+            ease: "power2.out"
+        })
+        .to(progress, {
             value: 100,
-            duration: 1.5,
-            ease: "power2.inOut",
+            duration: 2,
+            ease: "power3.inOut",
             onUpdate: () => {
                 if(percentText) percentText.textContent = `${Math.round(progress.value)}%`;
-                gsap.set('.preloader-bar', { width: `${progress.value}%` });
+                gsap.set('.preloader-progress-bar', { width: `${progress.value}%` });
             }
         })
-        .to('.preloader-text', {
+        .to('.preloader-progress-wrapper', {
+            opacity: 0,
+            y: -20,
+            duration: 0.5,
+            ease: "power2.in"
+        })
+        .to('.preloader-logo', {
             opacity: 1,
             y: 0,
             duration: 1,
-            ease: "power3.out"
-        }, "-=0.5")
-        .to('.preloader-content', {
-            opacity: 0,
-            duration: 0.5,
-            delay: 0.2
-        })
-        .to(preloader, {
+            ease: "power4.out"
+        }, "-=0.2")
+        .to('.preloader-logo', {
+            scale: 1.1,
+            duration: 1.5,
+            ease: "power2.inOut"
+        }, "-=0.8")
+        .to('.preloader-slice', {
             yPercent: -100,
-            duration: 1,
-            ease: "power4.inOut",
+            duration: 1.2,
+            ease: "power4.inOut"
+        })
+        .to('.preloader-logo', {
+            opacity: 0,
+            y: -50,
+            duration: 0.8,
+            ease: "power3.in"
+        }, "-=1.2")
+        .to(preloader, {
+            autoAlpha: 0,
+            duration: 0.1,
             onComplete: () => {
                 document.body.style.overflow = '';
                 lenis.start();
