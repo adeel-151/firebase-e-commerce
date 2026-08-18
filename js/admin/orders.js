@@ -125,6 +125,23 @@ if (saveOrderStatusBtn) {
             await updateDoc(doc(db, "orders", currentOrder.id), {
                 status: newStatus
             });
+            
+            // Try to send order status update email via EmailJS
+            try {
+                if (typeof emailjs !== 'undefined') {
+                    await emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", {
+                        to_email: currentOrder.userEmail,
+                        to_name: "Customer", // You could fetch the actual name if stored in order
+                        order_id: currentOrder.id,
+                        order_total: (currentOrder.total || 0).toFixed(2),
+                        order_status: newStatus
+                    });
+                    console.log(`Status update email sent for order ${currentOrder.id}`);
+                }
+            } catch (emailErr) {
+                console.error("EmailJS error (Status Update):", emailErr);
+            }
+
             orderModal.classList.remove('active');
             // Toast notification could be added here
         } catch (error) {

@@ -41,14 +41,14 @@ async function fetchProducts() {
         if (allProducts.length === 0) {
             const defaultProducts = [
                 // Clothes & Garments
-                { id: "seed1", title: "Premium Boski Silk", category: "Clothes", price: 15000, description: "Authentic premium boski silk for special occasions. Features a smooth, rich texture.", image: "https://images.unsplash.com/photo-1594938298596-eb5fd3f50db2?q=80&w=800&auto=format&fit=crop" },
+                { id: "seed1", title: "Premium Boski Silk", category: "Clothes", price: 15000, description: "Authentic premium boski silk for special occasions. Features a smooth, rich texture.", image: "https://picsum.photos/seed/lumiere4/800/1000" },
                 { id: "seed2", title: "Classic Wash & Wear", category: "Garments", price: 4500, description: "Durable and elegant wash & wear fabric for everyday use.", image: "https://images.unsplash.com/photo-1593030761757-71fae45fa0e7?q=80&w=800&auto=format&fit=crop" },
-                { id: "seed3", title: "Royal Cotton Suit", category: "Clothes", price: 6000, description: "100% pure Egyptian cotton. Breathable and comfortable.", image: "https://images.unsplash.com/photo-1594938328870-98233e536b56?q=80&w=800&auto=format&fit=crop" },
+                { id: "seed3", title: "Royal Cotton Suit", category: "Clothes", price: 6000, description: "100% pure Egyptian cotton. Breathable and comfortable.", image: "https://picsum.photos/seed/lumiere5/800/1000" },
                 { id: "seed4", title: "Signature Karandi", category: "Garments", price: 8500, description: "Warm and stylish karandi fabric for the winter season.", image: "https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03?q=80&w=800&auto=format&fit=crop" },
                 { id: "seed5", title: "Velvet Evening Gown", category: "Clothes", price: 25000, description: "Luxurious velvet evening gown for high-end events.", image: "https://images.unsplash.com/photo-1595777457583-95e059d581b8?q=80&w=800&auto=format&fit=crop" },
                 
                 // Shoes
-                { id: "seed6", title: "Oxford Leather Shoes", category: "Shoes", price: 12000, description: "Handcrafted genuine leather Oxford shoes.", image: "https://images.unsplash.com/photo-1614252339474-ce3a48e71c9b?q=80&w=800&auto=format&fit=crop" },
+                { id: "seed6", title: "Oxford Leather Shoes", category: "Shoes", price: 12000, description: "Handcrafted genuine leather Oxford shoes.", image: "https://picsum.photos/seed/lumiere6/800/1000" },
                 { id: "seed7", title: "Classic Urban Sneakers", category: "Shoes", price: 8000, description: "Comfortable and stylish urban sneakers.", image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?q=80&w=800&auto=format&fit=crop" },
                 { id: "seed8", title: "Stiletto Heels", category: "Shoes", price: 15000, description: "Elegant stiletto heels for parties.", image: "https://images.unsplash.com/photo-1543163521-1bf539c55dd2?q=80&w=800&auto=format&fit=crop" },
                 { id: "seed9", title: "Desert Boots", category: "Shoes", price: 9500, description: "Suede desert boots perfect for casual outings.", image: "https://images.unsplash.com/photo-1608231387042-66d1773070a5?q=80&w=800&auto=format&fit=crop" },

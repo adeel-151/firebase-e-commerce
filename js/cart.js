@@ -118,7 +118,24 @@ if (checkoutBtn) {
         };
         
         try {
-            await addDoc(collection(db, "orders"), orderData);
+            const docRef = await addDoc(collection(db, "orders"), orderData);
+            
+            // Try to send order confirmation email via EmailJS
+            try {
+                if (typeof emailjs !== 'undefined') {
+                    await emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", {
+                        to_email: user.email,
+                        to_name: user.displayName || 'Customer',
+                        order_id: docRef.id,
+                        order_total: total.toFixed(2),
+                        order_status: "Pending"
+                    });
+                    console.log("Order confirmation email sent.");
+                }
+            } catch (emailErr) {
+                console.error("EmailJS error (Order Confirmation):", emailErr);
+            }
+
             localStorage.removeItem('lumiere_cart');
             updateCartBadge();
             
