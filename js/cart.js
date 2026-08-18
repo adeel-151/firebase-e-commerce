@@ -60,16 +60,8 @@ function loadCartPage() {
     subtotalAmount.textContent = `Rs.${subtotal.toFixed(2)}`;
     totalAmount.textContent = `Rs.${subtotal.toFixed(2)}`;
     
-    // Check auth for checkout
-    auth.onAuthStateChanged(user => {
-        if (user) {
-            checkoutAuthMessage.style.display = 'none';
-            checkoutBtn.disabled = false;
-        } else {
-            checkoutAuthMessage.style.display = 'block';
-            checkoutBtn.disabled = true;
-        }
-    });
+    // Check auth for checkout (Removed for Guest Checkout)
+    // Auth is no longer required to checkout.
 }
 
 window.updateCartItem = (id, quantity) => {
@@ -96,63 +88,11 @@ window.removeCartItem = (id) => {
 };
 
 if (checkoutBtn) {
-    checkoutBtn.addEventListener('click', async () => {
-        const user = auth.currentUser;
-        if (!user) return;
-        
+    checkoutBtn.addEventListener('click', () => {
         const cart = JSON.parse(localStorage.getItem('lumiere_cart')) || [];
         if (cart.length === 0) return;
         
-        checkoutBtn.disabled = true;
-        checkoutBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Processing...';
-        
-        const total = cart.reduce((sum, item) => sum + (item.price * item.quantity), 0);
-        
-        const orderData = {
-            userId: user.uid,
-            userEmail: user.email,
-            items: cart,
-            total: total,
-            status: 'Pending',
-            createdAt: serverTimestamp()
-        };
-        
-        try {
-            const docRef = await addDoc(collection(db, "orders"), orderData);
-            
-            // Try to send order confirmation email via EmailJS
-            try {
-                if (typeof emailjs !== 'undefined') {
-                    await emailjs.send("YOUR_SERVICE_ID", "YOUR_TEMPLATE_ID", {
-                        to_email: user.email,
-                        to_name: user.displayName || 'Customer',
-                        order_id: docRef.id,
-                        order_total: total.toFixed(2),
-                        order_status: "Pending"
-                    });
-                    console.log("Order confirmation email sent.");
-                }
-            } catch (emailErr) {
-                console.error("EmailJS error (Order Confirmation):", emailErr);
-            }
-
-            localStorage.removeItem('lumiere_cart');
-            updateCartBadge();
-            
-            cartContent.innerHTML = `
-                <div class="col-12 d-flex flex-column align-items-center justify-content-center py-5 text-center mt-5">
-                    <i class="fas fa-check-circle display-1 text-brand-gold mb-4"></i>
-                    <h2 class="display-4 font-serif text-brand-dark mb-4">Order Confirmed!</h2>
-                    <p class="text-muted fs-5 mb-5 mx-auto" style="max-width: 500px;">Thank you for your purchase. We'll send you an email with your order details shortly.</p>
-                    <a href="shop.html" class="btn btn-dark rounded-0 px-5 py-3 tracking-widest text-uppercase fw-bold btn-custom-checkout">Continue Shopping</a>
-                </div>
-            `;
-        } catch (error) {
-            console.error("Checkout error:", error);
-            alert("Error processing checkout. Please try again.");
-            checkoutBtn.disabled = false;
-            checkoutBtn.innerHTML = 'Proceed to Checkout';
-        }
+        window.location.href = 'checkout.html';
     });
 }
 

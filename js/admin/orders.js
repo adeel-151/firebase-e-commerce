@@ -85,6 +85,18 @@ window.viewOrder = (id) => {
     document.getElementById('modalCustomerEmail').textContent = currentOrder.userEmail;
     document.getElementById('modalOrderDate').textContent = currentOrder.createdAt ? currentOrder.createdAt.toDate().toLocaleString() : 'N/A';
     document.getElementById('modalOrderTotal').textContent = `$${(currentOrder.total || 0).toFixed(2)}`;
+    
+    // New Fields
+    document.getElementById('modalPaymentMethod').textContent = currentOrder.paymentMethod || 'N/A';
+    
+    if (currentOrder.customerInfo) {
+        const info = currentOrder.customerInfo;
+        const name = `${info.firstName || ''} ${info.lastName || ''}`.trim();
+        document.getElementById('modalShippingAddress').innerHTML = `${name ? name + '<br>' : ''}${info.address || ''}<br>${info.city || ''} ${info.zip || ''}<br>${info.phone || ''}`;
+    } else {
+        document.getElementById('modalShippingAddress').textContent = 'No shipping info available.';
+    }
+    
     updateOrderStatus.value = currentOrder.status;
     
     const itemsList = document.getElementById('modalOrderItems');

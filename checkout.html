@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Checkout | Lumière</title>
+    <!-- Fonts -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom CSS -->
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="brand-beige-bg text-brand-dark font-sans">
+    
+    <!-- Navbar -->
+    <nav class="navbar navbar-expand-md navbar-dark bg-brand-dark-solid position-sticky top-0 w-100 z-3 py-4 shadow-sm">
+        <div class="container-fluid px-4 px-md-5 max-w-1600">
+            <!-- Left: Logo -->
+            <a class="navbar-brand fs-3 font-serif tracking-widest text-uppercase text-brand-beige" href="index.html">Lumière.</a>
+            <button class="navbar-toggler border-0 shadow-none" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+                <i class="fas fa-bars text-brand-beige fs-4"></i>
+            </button>
+            <div class="collapse navbar-collapse justify-content-end align-items-center" id="navbarNav">
+                <ul class="navbar-nav align-items-center gap-4 font-light tracking-wider text-uppercase small mt-4 mt-md-0">
+                    <li class="nav-item"><a class="nav-link text-brand-beige custom-nav-link" href="index.html">Home</a></li>
+                    <li class="nav-item"><a class="nav-link text-brand-beige custom-nav-link" href="shop.html">Shop</a></li>
+                    <li class="nav-item"><a class="nav-link text-brand-beige custom-nav-link" href="cart.html">Cart</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="container-fluid max-w-1600 px-4 px-md-5 py-5 my-5">
+        <h1 class="display-5 font-serif text-brand-dark mb-5">Checkout</h1>
+
+        <!-- Success Screen (Hidden initially) -->
+        <div id="checkoutSuccess" class="d-none col-12 d-flex flex-column align-items-center justify-content-center py-5 text-center mt-5">
+            <i class="fas fa-check-circle display-1 text-brand-gold mb-4"></i>
+            <h2 class="display-4 font-serif text-brand-dark mb-4">Order Confirmed!</h2>
+            <p class="text-muted fs-5 mb-5 mx-auto" style="max-width: 500px;">Thank you for your purchase. We have sent you an email with your order details shortly. Your Order ID is: <strong id="successOrderId"></strong></p>
+            <a href="shop.html" class="btn btn-dark rounded-0 px-5 py-3 tracking-widest text-uppercase fw-bold btn-custom-checkout magnetic">Continue Shopping</a>
+        </div>
+        
+        <div class="row g-5" id="checkoutContent">
+            <!-- Form Column -->
+            <div class="col-lg-7 d-flex flex-column gap-4">
+                <form id="checkoutForm">
+                    <!-- Contact Info -->
+                    <div class="bg-white p-4 p-md-5 border border-light mb-4">
+                        <h4 class="font-serif text-brand-dark mb-4">1. Contact Information</h4>
+                        <div class="row g-3">
+                            <div class="col-md-6">
+                                <label class="form-label small text-uppercase tracking-wider">First Name *</label>
+                                <input type="text" id="chkFirstName" class="form-control rounded-0 shadow-none border-secondary custom-input" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label small text-uppercase tracking-wider">Last Name *</label>
+                                <input type="text" id="chkLastName" class="form-control rounded-0 shadow-none border-secondary custom-input" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label small text-uppercase tracking-wider">Email Address *</label>
+                                <input type="email" id="chkEmail" class="form-control rounded-0 shadow-none border-secondary custom-input" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label small text-uppercase tracking-wider">Phone Number *</label>
+                                <input type="tel" id="chkPhone" class="form-control rounded-0 shadow-none border-secondary custom-input" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Shipping Address -->
+                    <div class="bg-white p-4 p-md-5 border border-light mb-4">
+                        <h4 class="font-serif text-brand-dark mb-4">2. Shipping Address</h4>
+                        <div class="row g-3">
+                            <div class="col-12">
+                                <label class="form-label small text-uppercase tracking-wider">Street Address *</label>
+                                <input type="text" id="chkAddress" class="form-control rounded-0 shadow-none border-secondary custom-input" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label small text-uppercase tracking-wider">City *</label>
+                                <input type="text" id="chkCity" class="form-control rounded-0 shadow-none border-secondary custom-input" required>
+                            </div>
+                            <div class="col-md-6">
+                                <label class="form-label small text-uppercase tracking-wider">ZIP / Postal Code *</label>
+                                <input type="text" id="chkZip" class="form-control rounded-0 shadow-none border-secondary custom-input" required>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Payment Method -->
+                    <div class="bg-white p-4 p-md-5 border border-light mb-4">
+                        <h4 class="font-serif text-brand-dark mb-4">3. Payment Method</h4>
+                        
+                        <div class="form-check mb-3 p-3 border border-secondary" style="background-color: #faf9f6;">
+                            <input class="form-check-input ms-1 me-3 mt-1" type="radio" name="paymentMethod" id="payCOD" value="COD" checked>
+                            <label class="form-check-label fw-bold d-block" for="payCOD">
+                                Cash on Delivery (COD)
+                                <span class="d-block text-muted fw-normal small mt-1">Pay with cash upon delivery.</span>
+                            </label>
+                        </div>
+                        
+                        <div class="form-check mb-3 p-3 border border-secondary" style="background-color: #faf9f6;">
+                            <input class="form-check-input ms-1 me-3 mt-1" type="radio" name="paymentMethod" id="payCard" value="Card">
+                            <label class="form-check-label fw-bold d-block w-100" for="payCard">
+                                Credit / Debit Card
+                                <span class="d-block text-muted fw-normal small mt-1">Secure dummy payment.</span>
+                            </label>
+                            
+                            <!-- Dummy Card Form (Hidden by default) -->
+                            <div id="cardForm" class="d-none mt-4 pt-3 border-top border-secondary">
+                                <div class="row g-3">
+                                    <div class="col-12">
+                                        <label class="form-label small text-uppercase tracking-wider">Card Number</label>
+                                        <input type="text" id="cardNumber" class="form-control rounded-0 shadow-none border-secondary custom-input" placeholder="0000 0000 0000 0000" maxlength="19">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label small text-uppercase tracking-wider">Expiry (MM/YY)</label>
+                                        <input type="text" id="cardExpiry" class="form-control rounded-0 shadow-none border-secondary custom-input" placeholder="MM/YY" maxlength="5">
+                                    </div>
+                                    <div class="col-md-6">
+                                        <label class="form-label small text-uppercase tracking-wider">CVV</label>
+                                        <input type="text" id="cardCvv" class="form-control rounded-0 shadow-none border-secondary custom-input" placeholder="123" maxlength="3">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            
+            <!-- Order Summary Column -->
+            <div class="col-lg-5">
+                <div class="bg-light-sage p-4 p-md-5 h-100 position-sticky top-0" style="z-index: 1;">
+                    <h3 class="fs-4 font-serif text-brand-dark mb-4 border-bottom border-secondary pb-3">Order Summary</h3>
+                    
+                    <div id="checkoutItemsContainer" class="mb-4 d-flex flex-column gap-3 border-bottom border-secondary pb-4">
+                        <!-- Items injected via JS -->
+                    </div>
+
+                    <div class="d-flex justify-content-between align-items-center mb-3 text-muted">
+                        <span>Subtotal</span>
+                        <span id="checkoutSubtotal" class="fw-bold text-brand-dark">Rs.0.00</span>
+                    </div>
+                    
+                    <div class="d-flex justify-content-between align-items-center mb-4 text-muted">
+                        <span>Shipping</span>
+                        <span class="fw-bold text-brand-dark">Free</span>
+                    </div>
+                    
+                    <div class="d-flex justify-content-between align-items-center border-top border-secondary pt-4 mb-5 fs-5">
+                        <span class="text-brand-dark font-serif">Total</span>
+                        <span id="checkoutTotal" class="fw-bold text-brand-dark">Rs.0.00</span>
+                    </div>
+                    
+                    <button type="submit" form="checkoutForm" id="placeOrderBtn" class="btn btn-dark w-100 py-3 rounded-0 tracking-widest text-uppercase fw-bold btn-custom-checkout magnetic">Place Order</button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Bootstrap 5 JS Bundle -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <script type="text/javascript">
+        (function() {
+            emailjs.init("YOUR_PUBLIC_KEY");
+        })();
+    </script>
+    <script type="module" src="js/firebase-config.js"></script>
+    <script type="module" src="js/checkout.js"></script>
+
+    <!-- Mega Footer -->
+    <footer class="footer-mega pt-5 mt-5 bg-brand-dark" style="color: #f5f0e6;">
+        <div class="py-4" style="border-top: 1px solid rgba(255,255,255,0.05);">
+            <div class="container-fluid px-4 px-md-5 max-w-1600 d-flex flex-column flex-md-row justify-content-between align-items-center gap-3">
+                <p class="mb-0 small fw-light" style="color: #a0aab2;">&copy; 2024 Lumière. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
