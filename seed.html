@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Seed Dummy Accounts | Lumière</title>
+    <!-- Bootstrap 5 CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body class="brand-beige-bg text-brand-dark d-flex align-items-center justify-content-center min-vh-100">
+    <div class="card bg-brand-dark text-white border-0 rounded-0 shadow-lg p-4" style="max-width: 500px; width: 100%;">
+        <h2 class="font-serif text-brand-gold text-center mb-4">Account Seeder</h2>
+        <p class="text-white-50 text-center small mb-4">Click the button below to create the default Admin and User dummy accounts.</p>
+        
+        <div id="seedStatus" class="alert d-none" role="alert"></div>
+
+        <button id="seedBtn" class="btn btn-light rounded-0 w-100 py-3 fw-bold tracking-wider text-uppercase btn-lumiere">
+            Create Dummy Accounts
+        </button>
+
+        <div class="mt-4 text-center small">
+            <p><strong>Admin:</strong> admin@example.com / admin123</p>
+            <p><strong>User:</strong> user@example.com / user123</p>
+            <a href="index.html" class="text-brand-gold text-decoration-none mt-3 d-inline-block">Back to Home</a>
+        </div>
+    </div>
+
+    <script type="module" src="js/seed.js"></script>
+</body>
+</html>

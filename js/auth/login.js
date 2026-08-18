@@ -1,5 +1,6 @@
-import { auth } from '../firebase-config.js';
+import { auth, db } from '../firebase-config.js';
 import { signInWithEmailAndPassword } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-auth.js";
+import { doc, getDoc } from "https://www.gstatic.com/firebasejs/10.8.1/firebase-firestore.js";
 
 const loginForm = document.getElementById('loginForm');
 const errorMsg = document.getElementById('authError');
@@ -17,12 +18,22 @@ if (loginForm) {
         loginBtn.innerHTML = '<i class="fas fa-spinner fa-spin mr-2"></i> Signing in...';
         
         try {
-            await signInWithEmailAndPassword(auth, email, password);
+            const userCredential = await signInWithEmailAndPassword(auth, email, password);
+            const user = userCredential.user;
             
-            // Redirect based on previous page or default to home
-            // In a real app we might check user role in Firestore here
-            // to redirect admins to dashboard directly
-            window.location.href = '../index.html';
+            // Check user role in Firestore
+            const userDoc = await getDoc(doc(db, "users", user.uid));
+            let isAdmin = false;
+            if (userDoc.exists()) {
+                isAdmin = userDoc.data().role === 'admin';
+            }
+            
+            // Redirect based on role
+            if (isAdmin) {
+                window.location.href = '../admin/index.html';
+            } else {
+                window.location.href = '../index.html';
+            }
             
         } catch (error) {
             console.error("Login error:", error);

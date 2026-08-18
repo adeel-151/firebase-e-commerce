@@ -13,6 +13,11 @@ onAuthStateChanged(auth, async (user) => {
         const isAdmin = await checkUserRole(user.uid);
         updateNavigation(user, isAdmin);
         
+        // Protect admin routes from non-admins
+        if (window.location.pathname.includes('/admin/') && !isAdmin) {
+            window.location.href = '../index.html';
+        }
+
         // If on login/signup page, redirect to home
         if (window.location.pathname.includes('login.html') || window.location.pathname.includes('signup.html')) {
             window.location.href = '../index.html';
